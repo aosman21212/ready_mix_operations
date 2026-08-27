@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_ready_mix_qc_test_form" model="ir.ui.view">
+        <field name="name">ready.mix.qc.test.form</field>
+        <field name="model">ready.mix.qc.test</field>
+        <field name="arch" type="xml">
+            <form string="Fresh QC Test">
+                <header>
+                    <button name="action_confirm" string="Confirm Results" type="object"
+                            class="btn-primary" invisible="state != 'draft'"/>
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <widget name="web_ribbon" title="FAIL" bg_color="bg-danger"
+                            invisible="overall_result != 'fail'"/>
+                    <widget name="web_ribbon" title="PASS" bg_color="bg-success"
+                            invisible="overall_result != 'pass'"/>
+                    <div class="oe_title">
+                        <h1><field name="name" readonly="1"/></h1>
+                    </div>
+                    <group>
+                        <group string="Reference">
+                            <field name="load_id"/>
+                            <field name="mix_product_id" readonly="1"/>
+                            <field name="plant_id" readonly="1"/>
+                            <field name="test_date"/>
+                            <field name="technician_id"/>
+                        </group>
+                        <group string="Overall Result">
+                            <field name="overall_result" widget="badge"
+                                   decoration-success="overall_result == 'pass'"
+                                   decoration-danger="overall_result == 'fail'"
+                                   decoration-warning="overall_result == 'pending'"/>
+                            <field name="ncr_id" readonly="1"/>
+                        </group>
+                    </group>
+                    <group string="Fresh Test Results">
+                        <group>
+                            <field name="slump"/>
+                            <field name="slump_pass" widget="badge" readonly="1"
+                                   decoration-success="slump_pass == 'pass'"
+                                   decoration-danger="slump_pass == 'fail'"/>
+                            <field name="air_content"/>
+                            <field name="air_pass" widget="badge" readonly="1"
+                                   decoration-success="air_pass == 'pass'"
+                                   decoration-danger="air_pass == 'fail'"/>
+                        </group>
+                        <group>
+                            <field name="temperature"/>
+                            <field name="density"/>
+                            <field name="water_added"/>
+                            <field name="wc_ratio"/>
+                        </group>
+                    </group>
+                    <group string="Remarks">
+                        <field name="notes" nolabel="1" colspan="2"/>
+                    </group>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_ready_mix_qc_test_list" model="ir.ui.view">
+        <field name="name">ready.mix.qc.test.list</field>
+        <field name="model">ready.mix.qc.test</field>
+        <field name="arch" type="xml">
+            <list string="QC Tests" decoration-danger="overall_result == 'fail'">
+                <field name="name"/>
+                <field name="test_date"/>
+                <field name="load_id"/>
+                <field name="plant_id"/>
+                <field name="mix_product_id"/>
+                <field name="slump"/>
+                <field name="slump_pass" widget="badge"
+                       decoration-success="slump_pass == 'pass'"
+                       decoration-danger="slump_pass == 'fail'"/>
+                <field name="air_content"/>
+                <field name="temperature"/>
+                <field name="wc_ratio"/>
+                <field name="overall_result" widget="badge"
+                       decoration-success="overall_result == 'pass'"
+                       decoration-danger="overall_result == 'fail'"
+                       decoration-warning="overall_result == 'pending'"/>
+                <field name="state"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="action_ready_mix_qc_test" model="ir.actions.act_window">
+        <field name="name">Fresh QC Tests</field>
+        <field name="res_model">ready.mix.qc.test</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>

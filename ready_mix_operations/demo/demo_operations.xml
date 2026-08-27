@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- ══════════════════════════════════════════════════
+             DELIVERY SCHEDULES
+        ══════════════════════════════════════════════════ -->
+        <record id="sch_marina_001" model="ready.mix.schedule">
+            <field name="name">SCH/2026/0041</field>
+            <field name="partner_id" ref="partner_mega_builders"/>
+            <field name="jobsite_id" ref="site_marina_tower"/>
+            <field name="plant_id" ref="plant_central"/>
+            <field name="mix_product_id" ref="mix_c35"/>
+            <field name="delivery_date">2026-08-27</field>
+            <field name="requested_volume">56.0</field>
+            <field name="pour_rate">14.0</field>
+            <field name="start_time">7.0</field>
+            <field name="pump_required">True</field>
+            <field name="state">dispatched</field>
+            <field name="notes">Level 12 slab pour. Pump set up on south side.</field>
+        </record>
+
+        <record id="sch_bridge_001" model="ready.mix.schedule">
+            <field name="name">SCH/2026/0042</field>
+            <field name="partner_id" ref="partner_gulf_contracting"/>
+            <field name="jobsite_id" ref="site_harbour_gate"/>
+            <field name="plant_id" ref="plant_central"/>
+            <field name="mix_product_id" ref="mix_c40"/>
+            <field name="delivery_date">2026-08-27</field>
+            <field name="requested_volume">42.0</field>
+            <field name="pour_rate">10.0</field>
+            <field name="start_time">6.0</field>
+            <field name="pump_required">True</field>
+            <field name="state">confirmed</field>
+            <field name="notes">Bridge deck segment D4. Night shift available if needed.</field>
+        </record>
+
+        <record id="sch_warehouse_001" model="ready.mix.schedule">
+            <field name="name">SCH/2026/0040</field>
+            <field name="partner_id" ref="partner_national_works"/>
+            <field name="jobsite_id" ref="site_industrial_zone"/>
+            <field name="plant_id" ref="plant_north"/>
+            <field name="mix_product_id" ref="mix_c25"/>
+            <field name="delivery_date">2026-08-26</field>
+            <field name="requested_volume">84.0</field>
+            <field name="pour_rate">20.0</field>
+            <field name="start_time">7.5</field>
+            <field name="pump_required">False</field>
+            <field name="state">completed</field>
+        </record>
+
+        <!-- ══════════════════════════════════════════════════
+             DISPATCHES — for Marina Tower schedule
+        ══════════════════════════════════════════════════ -->
+        <record id="disp_marina_01" model="ready.mix.dispatch">
+            <field name="name">DIS/2026/00201</field>
+            <field name="schedule_id" ref="sch_marina_001"/>
+            <field name="plant_id" ref="plant_central"/>
+            <field name="partner_id" ref="partner_mega_builders"/>
+            <field name="jobsite_id" ref="site_marina_tower"/>
+            <field name="mix_product_id" ref="mix_c35"/>
+            <field name="delivery_date">2026-08-27</field>
+            <field name="sequence">1</field>
+            <field name="planned_time">7.0</field>
+            <field name="volume">7.0</field>
+            <field name="vehicle_id" ref="fleet.vehicle_1"/>
+            <field name="driver_id" ref="partner_driver_ahmed"/>
+            <field name="state">delivered</field>
+        </record>
+
+        <record id="disp_marina_02" model="ready.mix.dispatch">
+            <field name="name">DIS/2026/00202</field>
+            <field name="schedule_id" ref="sch_marina_001"/>
+            <field name="plant_id" ref="plant_central"/>
+            <field name="partner_id" ref="partner_mega_builders"/>
+            <field name="jobsite_id" ref="site_marina_tower"/>
+            <field name="mix_product_id" ref="mix_c35"/>
+            <field name="delivery_date">2026-08-27</field>
+            <field name="sequence">2</field>
+            <field name="planned_time">7.5</field>
+            <field name="volume">7.0</field>
+            <field name="vehicle_id" ref="fleet.vehicle_2"/>
+            <field name="driver_id" ref="partner_driver_mike"/>
+            <field name="state">delivered</field>
+        </record>
+
+        <record id="disp_marina_03" model="ready.mix.dispatch">
+            <field name="name">DIS/2026/00203</field>
+            <field name="schedule_id" ref="sch_marina_001"/>
+            <field name="plant_id" ref="plant_central"/>
+            <field name="partner_id" ref="partner_mega_builders"/>
+            <field name="jobsite_id" ref="site_marina_tower"/>
+            <field name="mix_product_id" ref="mix_c35"/>
+            <field name="delivery_date">2026-08-27</field>
+            <field name="sequence">3</field>
+            <field name="planned_time">8.0</field>
+            <field name="volume">7.0</field>
+            <field name="vehicle_id" ref="fleet.vehicle_3"/>
+            <field name="driver_id" ref="partner_driver_sara"/>
+            <field name="state">in_transit</field>
+        </record>
+
+        <!-- ══════════════════════════════════════════════════
+             LOAD TICKETS
+        ══════════════════════════════════════════════════ -->
+
+        <!-- LT 1 — Delivered, invoiced, no breach -->
+        <record id="load_marina_01" model="ready.mix.load">
+            <field name="name">LT/2026/00042</field>
+            <field name="dispatch_id" ref="disp_marina_01"/>
+            <field name="partner_id" ref="partner_mega_builders"/>
+            <field name="jobsite_id" ref="site_marina_tower"/>
+            <field name="plant_id" ref="plant_central"/>
+            <field name="mix_product_id" ref="mix_c35"/>
+            <field name="vehicle_id" ref="fleet.vehicle_1"/>
+            <field name="driver_id" ref="partner_driver_ahmed"/>
+            <field name="delivery_date">2026-08-27</field>
+            <field name="volume_ordered">7.0</field>
+            <field name="volume_delivered">7.0</field>
+            <field name="batching_time">2026-08-27 07:10:00</field>
+            <field name="departure_time">2026-08-27 07:18:00</field>
+            <field name="arrival_time">2026-08-27 07:52:00</field>
+            <field name="discharge_start_time">2026-08-27 08:05:00</field>
+            <field name="discharge_end_time">2026-08-27 08:38:00</field>
+            <field name="return_time">2026-08-27 09:10:00</field>
+            <field name="drum_revolutions">148</field>
+            <field name="water_added_site">0.0</field>
+            <field name="wc_ratio_actual">0.472</field>
+            <field name="unit_price">85.00</field>
+            <field name="state">delivered</field>
+            <field name="signed_by">John Carter</field>
+            <field name="signed_time">2026-08-27 08:38:00</field>
+        </record>
+        <!-- Material lines for load 1 -->
+        <record id="load_marina_01_mat1" model="ready.mix.load.material">
+            <field name="load_id" ref="load_marina_01"/>
+            <field name="sequence">10</field>
+            <field name="product_id" ref="product_opc_cement"/>
+            <field name="silo_id" ref="silo_cement_2"/>
+            <field name="target_qty">2590.0</field>
+            <field name="actual_qty">2592.5</field>
+            <field name="moisture_pct">0.0</field>
+        </record>
+        <record id="load_marina_01_mat2" model="ready.mix.load.material">
+            <field name="load_id" ref="load_marina_01"/>
+            <field name="sequence">20</field>
+            <field name="product_id" ref="product_coarse_aggregate"/>
+            <field name="silo_id" ref="silo_coarse_agg"/>
+            <field name="target_qty">6650.0</field>
+            <field name="actual_qty">6638.0</field>
+            <field name="moisture_pct">1.2</field>
+        </record>
+        <record id="load_marina_01_mat3" model="ready.mix.load.material">
+            <field name="load_id" ref="load_marina_01"/>
+            <field name="sequence">30</field>
+            <field name="product_id" ref="product_fine_aggregate"/>
+            <field name="silo_id" ref="silo_fine_agg"/>
+            <field name="target_qty">4760.0</field>
+            <field name="actual_qty">4755.0</field>
+            <field name="moisture_pct">4.8</field>
+        </record>
+        <record id="load_marina_01_mat4" model="ready.mix.load.material">
+            <field name="load_id" ref="load_marina_01"/>
+            <field name="sequence">40</field>
+            <field name="product_id" ref="product_water"/>
+            <field name="silo_id" ref="silo_water"/>
+            <field name="target_qty">1243.2</field>
+            <field name="actual_qty">1240.0</field>
+            <field name="moisture_pct">0.0</field>
+        </record>
+        <record id="load_marina_01_mat5" model="ready.mix.load.material">
+            <field name="load_id" ref="load_marina_01"/>
+            <field name="sequence">50</field>
+            <field name="product_id" ref="product_admixture"/>
+            <field name="silo_id" ref="silo_admixture"/>
+            <field name="target_qty">38.5</field>
+            <field name="actual_qty">38.5</field>
+            <field name="moisture_pct">0.0</field>
+        </record>
+
+        <!-- LT 2 — Delivered, not yet invoiced -->
+        <record id="load_marina_02" model="ready.mix.load">
+            <field name="name">LT/2026/00041</field>
+            <field name="dispatch_id" ref="disp_marina_02"/>
+            <field name="partner_id" ref="partner_mega_builders"/>
+            <field name="jobsite_id" ref="site_marina_tower"/>
+            <field name="plant_id" ref="plant_central"/>
+            <field name="mix_product_id" ref="mix_c35"/>
+            <field name="vehicle_id" ref="fleet.vehicle_2"/>
+            <field name="driver_id" ref="partner_driver_mike"/>
+            <field name="delivery_date">2026-08-27</field>
+            <field name="volume_ordered">7.0</field>
+            <field name="volume_delivered">6.8</field>
+            <field name="volume_returned">0.2</field>
+            <field name="batching_time">2026-08-27 07:45:00</field>
+            <field name="departure_time">2026-08-27 07:53:00</field>
+            <field name="arrival_time">2026-08-27 08:28:00</field>
+            <field name="discharge_start_time">2026-08-27 08:40:00</field>
+            <field name="discharge_end_time">2026-08-27 09:18:00</field>
+            <field name="drum_revolutions">162</field>
+            <field name="water_added_site">0.0</field>
+            <field name="wc_ratio_actual">0.464</field>
+            <field name="unit_price">85.00</field>
+            <field name="state">delivered</field>
+            <field name="signed_by">John Carter</field>
+            <field name="signed_time">2026-08-27 09:18:00</field>
+        </record>
+
+        <!-- LT 3 — In Transit -->
+        <record id="load_marina_03" model="ready.mix.load">
+            <field name="name">LT/2026/00043</field>
+            <field name="dispatch_id" ref="disp_marina_03"/>
+            <field name="partner_id" ref="partner_mega_builders"/>
+            <field name="jobsite_id" ref="site_marina_tower"/>
+            <field name="plant_id" ref="plant_central"/>
+            <field name="mix_product_id" ref="mix_c35"/>
+            <field name="vehicle_id" ref="fleet.vehicle_3"/>
+            <field name="driver_id" ref="partner_driver_sara"/>
+            <field name="delivery_date">2026-08-27</field>
+            <field name="volume_ordered">7.0</field>
+            <field name="batching_time">2026-08-27 08:22:00</field>
+            <field name="departure_time">2026-08-27 08:30:00</field>
+            <field name="drum_revolutions">45</field>
+            <field name="unit_price">85.00</field>
+            <field name="state">in_transit</field>
+        </record>
+
+        <!-- LT 4 — Bridge pour, Gulf Contracting, Delivered -->
+        <record id="load_bridge_01" model="ready.mix.load">
+            <field name="name">LT/2026/00038</field>
+            <field name="partner_id" ref="partner_gulf_contracting"/>
+            <field name="jobsite_id" ref="site_harbour_gate"/>
+            <field name="plant_id" ref="plant_central"/>
+            <field name="mix_product_id" ref="mix_c40"/>
+            <field name="vehicle_id" ref="fleet.vehicle_4"/>
+            <field name="driver_id" ref="partner_driver_ahmed"/>
+            <field name="delivery_date">2026-08-26</field>
+            <field name="volume_ordered">7.0</field>
+            <field name="volume_delivered">7.0</field>
+            <field name="batching_time">2026-08-26 06:05:00</field>
+            <field name="departure_time">2026-08-26 06:14:00</field>
+            <field name="arrival_time">2026-08-26 06:58:00</field>
+            <field name="discharge_start_time">2026-08-26 07:10:00</field>
+            <field name="discharge_end_time">2026-08-26 07:48:00</field>
+            <field name="drum_revolutions">195</field>
+            <field name="water_added_site">0.0</field>
+            <field name="wc_ratio_actual">0.395</field>
+            <field name="unit_price">98.00</field>
+            <field name="state">delivered</field>
+            <field name="signed_by">Omar Farouk</field>
+        </record>
+
+        <!-- LT 5 — Compliance breach (drum revolutions exceeded) -->
+        <record id="load_breach_01" model="ready.mix.load">
+            <field name="name">LT/2026/00035</field>
+            <field name="partner_id" ref="partner_national_works"/>
+            <field name="jobsite_id" ref="site_industrial_zone"/>
+            <field name="plant_id" ref="plant_north"/>
+            <field name="mix_product_id" ref="mix_c25"/>
+            <field name="vehicle_id" ref="fleet.vehicle_5"/>
+            <field name="driver_id" ref="partner_driver_mike"/>
+            <field name="delivery_date">2026-08-25</field>
+            <field name="volume_ordered">7.0</field>
+            <field name="volume_delivered">6.5</field>
+            <field name="batching_time">2026-08-25 09:00:00</field>
+            <field name="departure_time">2026-08-25 09:12:00</field>
+            <field name="arrival_time">2026-08-25 10:50:00</field>
+            <field name="discharge_start_time">2026-08-25 11:05:00</field>
+            <field name="discharge_end_time">2026-08-25 11:45:00</field>
+            <field name="drum_revolutions">332</field>
+            <field name="water_added_site">15.0</field>
+            <field name="wc_ratio_actual">0.61</field>
+            <field name="unit_price">63.00</field>
+            <field name="state">delivered</field>
+            <field name="notes">Truck was held at weighbridge for 90 minutes. Drum revolutions exceeded limit.</field>
+        </record>
+    </data>
+</odoo>

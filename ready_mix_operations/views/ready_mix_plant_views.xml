@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_ready_mix_plant_form" model="ir.ui.view">
+        <field name="name">ready.mix.plant.form</field>
+        <field name="model">ready.mix.plant</field>
+        <field name="arch" type="xml">
+            <form string="Plant">
+                <header/>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_view_silos" type="object" class="oe_stat_button" icon="fa-database">
+                            <field name="silo_count" widget="statinfo" string="Silos"/>
+                        </button>
+                        <button name="action_view_loads" type="object" class="oe_stat_button" icon="fa-truck">
+                            <field name="load_count" widget="statinfo" string="Loads"/>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <h1><field name="name" placeholder="Plant Name"/></h1>
+                        <h2><field name="code" placeholder="Plant Code"/></h2>
+                    </div>
+                    <group>
+                        <group string="General">
+                            <field name="partner_id"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                            <field name="timezone"/>
+                            <field name="active"/>
+                        </group>
+                        <group string="Capacity">
+                            <field name="capacity_m3_per_hour"/>
+                            <field name="max_trucks"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group string="Compliance">
+                            <field name="quality_standard"/>
+                            <field name="max_transit_time"/>
+                            <field name="max_drum_revolutions"/>
+                            <field name="block_on_cert_gap"/>
+                            <field name="block_on_stock_gap"/>
+                        </group>
+                        <group string="Cost Rates">
+                            <field name="transport_rate"/>
+                            <field name="driver_rate"/>
+                            <field name="pump_rate"/>
+                            <field name="overhead_rate"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Silos / Storage">
+                            <field name="silo_ids" mode="list">
+                                <list>
+                                    <field name="name"/>
+                                    <field name="silo_type"/>
+                                    <field name="product_id"/>
+                                    <field name="current_stock"/>
+                                    <field name="capacity_tonnes"/>
+                                    <field name="fill_percentage" widget="progressbar"/>
+                                    <field name="reorder_point"/>
+                                    <field name="calibration_status" widget="badge"
+                                           decoration-success="calibration_status == 'valid'"
+                                           decoration-warning="calibration_status == 'due_soon'"
+                                           decoration-danger="calibration_status == 'overdue'"
+                                           decoration-muted="calibration_status == 'not_set'"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_ready_mix_plant_list" model="ir.ui.view">
+        <field name="name">ready.mix.plant.list</field>
+        <field name="model">ready.mix.plant</field>
+        <field name="arch" type="xml">
+            <list string="Plants">
+                <field name="name"/>
+                <field name="code"/>
+                <field name="partner_id"/>
+                <field name="quality_standard"/>
+                <field name="capacity_m3_per_hour"/>
+                <field name="silo_count"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="action_ready_mix_plant" model="ir.actions.act_window">
+        <field name="name">Plants</field>
+        <field name="res_model">ready.mix.plant</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>

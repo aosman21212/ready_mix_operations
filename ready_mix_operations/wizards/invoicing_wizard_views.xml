@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_ready_mix_invoicing_wizard_form" model="ir.ui.view">
+        <field name="name">ready.mix.invoicing.wizard.form</field>
+        <field name="model">ready.mix.invoicing.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Create Invoices">
+                <group string="Filter Loads">
+                    <group>
+                        <field name="partner_id"/>
+                        <field name="plant_id"/>
+                        <field name="date_from"/>
+                        <field name="date_to"/>
+                    </group>
+                    <group>
+                        <field name="grouping"/>
+                        <field name="journal_id"/>
+                    </group>
+                </group>
+                <group string="Loads Found">
+                    <group>
+                        <field name="load_count" readonly="1" string="Loads"/>
+                        <field name="total_volume" readonly="1"/>
+                        <field name="total_amount" readonly="1"/>
+                    </group>
+                </group>
+                <footer>
+                    <button name="action_create_invoices" type="object" string="Create Invoices"
+                            class="btn-primary"/>
+                    <button special="cancel" string="Cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_ready_mix_invoicing_wizard" model="ir.actions.act_window">
+        <field name="name">Create Invoices</field>
+        <field name="res_model">ready.mix.invoicing.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem id="menu_ready_mix_invoicing"
+              name="Create Invoices"
+              parent="menu_ready_mix_finance"
+              action="action_ready_mix_invoicing_wizard"
+              sequence="5"
+              groups="ready_mix_operations.group_ready_mix_finance"/>
+</odoo>

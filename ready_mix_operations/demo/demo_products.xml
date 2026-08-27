@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- ══════════════════════════════════════════════════
+             RAW MATERIAL PRODUCTS (consumable)
+             Create product.product directly — template is
+             auto-generated, avoiding duplicate variant issues.
+        ══════════════════════════════════════════════════ -->
+        <record id="product_opc_cement" model="product.product">
+            <field name="name">OPC Cement 52.5R</field>
+            <field name="type">consu</field>
+            <field name="uom_id" ref="uom.product_uom_kgm"/>
+            <field name="standard_price">0.12</field>
+            <field name="categ_id" ref="product.product_category_goods"/>
+        </record>
+
+        <record id="product_coarse_aggregate" model="product.product">
+            <field name="name">Coarse Aggregate 20mm</field>
+            <field name="type">consu</field>
+            <field name="uom_id" ref="uom.product_uom_kgm"/>
+            <field name="standard_price">0.035</field>
+            <field name="categ_id" ref="product.product_category_goods"/>
+        </record>
+
+        <record id="product_fine_aggregate" model="product.product">
+            <field name="name">Fine Aggregate (Sand)</field>
+            <field name="type">consu</field>
+            <field name="uom_id" ref="uom.product_uom_kgm"/>
+            <field name="standard_price">0.022</field>
+            <field name="categ_id" ref="product.product_category_goods"/>
+        </record>
+
+        <record id="product_water" model="product.product">
+            <field name="name">Mix Water</field>
+            <field name="type">consu</field>
+            <field name="uom_id" ref="uom.product_uom_kgm"/>
+            <field name="standard_price">0.001</field>
+            <field name="categ_id" ref="product.product_category_goods"/>
+        </record>
+
+        <record id="product_admixture" model="product.product">
+            <field name="name">Superplasticizer (SP)</field>
+            <field name="type">consu</field>
+            <field name="uom_id" ref="uom.product_uom_kgm"/>
+            <field name="standard_price">2.50</field>
+            <field name="categ_id" ref="product.product_category_goods"/>
+        </record>
+
+        <!-- ══════════════════════════════════════════════════
+             SALEABLE CONCRETE PRODUCTS (service)
+        ══════════════════════════════════════════════════ -->
+        <record id="product_c25" model="product.product">
+            <field name="name">Ready Mix Concrete C25/30</field>
+            <field name="type">service</field>
+            <field name="uom_id" ref="uom.product_uom_cubic_meter"/>
+            <field name="list_price">65.00</field>
+            <field name="categ_id" ref="product.product_category_services"/>
+        </record>
+
+        <record id="product_c30" model="product.product">
+            <field name="name">Ready Mix Concrete C30/37</field>
+            <field name="type">service</field>
+            <field name="uom_id" ref="uom.product_uom_cubic_meter"/>
+            <field name="list_price">75.00</field>
+            <field name="categ_id" ref="product.product_category_services"/>
+        </record>
+
+        <record id="product_c35" model="product.product">
+            <field name="name">Ready Mix Concrete C35/45</field>
+            <field name="type">service</field>
+            <field name="uom_id" ref="uom.product_uom_cubic_meter"/>
+            <field name="list_price">85.00</field>
+            <field name="categ_id" ref="product.product_category_services"/>
+        </record>
+
+        <record id="product_c40" model="product.product">
+            <field name="name">Ready Mix Concrete C40/50</field>
+            <field name="type">service</field>
+            <field name="uom_id" ref="uom.product_uom_cubic_meter"/>
+            <field name="list_price">98.00</field>
+            <field name="categ_id" ref="product.product_category_services"/>
+        </record>
+    </data>
+</odoo>

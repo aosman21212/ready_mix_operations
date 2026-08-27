@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- ══════════════════════════════════════════════════
+             CERTIFICATES
+        ══════════════════════════════════════════════════ -->
+
+        <!-- Plant certificates -->
+        <record id="cert_plant_iso" model="ready.mix.certificate">
+            <field name="name">ISO 9001:2015 Quality Management</field>
+            <field name="cert_type">plant</field>
+            <field name="plant_id" ref="plant_central"/>
+            <field name="reference_no">QMS-2024-0441</field>
+            <field name="issuing_body">Bureau Veritas</field>
+            <field name="scope">Ready-mix concrete production at Central Batching Plant</field>
+            <field name="issue_date">2024-03-01</field>
+            <field name="expiry_date">2027-03-01</field>
+        </record>
+
+        <record id="cert_plant_qc_lab" model="ready.mix.certificate">
+            <field name="name">Concrete Testing Laboratory Accreditation</field>
+            <field name="cert_type">plant</field>
+            <field name="plant_id" ref="plant_central"/>
+            <field name="reference_no">LAB-ACC-2023-118</field>
+            <field name="issuing_body">National Accreditation Body</field>
+            <field name="scope">Compressive strength testing of cubes and cylinders</field>
+            <field name="issue_date">2023-09-20</field>
+            <field name="expiry_date">2026-09-20</field>
+        </record>
+
+        <record id="cert_plant_north_env" model="ready.mix.certificate">
+            <field name="name">Environmental Compliance Permit</field>
+            <field name="cert_type">plant</field>
+            <field name="plant_id" ref="plant_north"/>
+            <field name="reference_no">ENV-PERMIT-2025-044</field>
+            <field name="issuing_body">City Environmental Agency</field>
+            <field name="scope">Washout and water discharge management</field>
+            <field name="issue_date">2025-01-10</field>
+            <field name="expiry_date">2027-01-10</field>
+        </record>
+
+        <!-- Vehicle certificates -->
+        <record id="cert_truck1" model="ready.mix.certificate">
+            <field name="name">Transit Mixer Roadworthiness – Nissan Truck 1</field>
+            <field name="cert_type">vehicle</field>
+            <field name="plant_id" ref="plant_central"/>
+            <field name="vehicle_id" ref="fleet.vehicle_1"/>
+            <field name="reference_no">VEH-CERT-2025-001</field>
+            <field name="issuing_body">Vehicle Inspection Authority</field>
+            <field name="scope">Annual roadworthiness certificate</field>
+            <field name="issue_date">2025-08-01</field>
+            <field name="expiry_date">2026-08-01</field>
+        </record>
+
+        <record id="cert_truck2_expired" model="ready.mix.certificate">
+            <field name="name">Transit Mixer Roadworthiness – Renault Truck 3</field>
+            <field name="cert_type">vehicle</field>
+            <field name="plant_id" ref="plant_central"/>
+            <field name="vehicle_id" ref="fleet.vehicle_3"/>
+            <field name="reference_no">VEH-CERT-2024-003</field>
+            <field name="issuing_body">Vehicle Inspection Authority</field>
+            <field name="scope">Annual roadworthiness certificate</field>
+            <field name="issue_date">2024-07-15</field>
+            <field name="expiry_date">2026-07-31</field>
+        </record>
+
+        <!-- Personnel certificates -->
+        <record id="cert_driver_ahmed" model="ready.mix.certificate">
+            <field name="name">Ready-Mix Driver Licence – Ahmed Hassan</field>
+            <field name="cert_type">personnel</field>
+            <field name="plant_id" ref="plant_central"/>
+            <field name="employee_id" ref="partner_driver_ahmed"/>
+            <field name="reference_no">DRV-LIC-AH-2024</field>
+            <field name="issuing_body">Transport Authority</field>
+            <field name="scope">Heavy goods vehicle + transit mixer endorsement</field>
+            <field name="issue_date">2024-01-10</field>
+            <field name="expiry_date">2027-01-10</field>
+        </record>
+
+        <record id="cert_driver_mike" model="ready.mix.certificate">
+            <field name="name">Ready-Mix Driver Licence – Mike Reyes</field>
+            <field name="cert_type">personnel</field>
+            <field name="plant_id" ref="plant_central"/>
+            <field name="employee_id" ref="partner_driver_mike"/>
+            <field name="reference_no">DRV-LIC-MR-2025</field>
+            <field name="issuing_body">Transport Authority</field>
+            <field name="scope">Heavy goods vehicle + transit mixer endorsement</field>
+            <field name="issue_date">2025-02-20</field>
+            <field name="expiry_date">2026-09-15</field>
+        </record>
+
+        <!-- Material certificate -->
+        <record id="cert_cement_supplier" model="ready.mix.certificate">
+            <field name="name">OPC 52.5R – Batch Certificate Aug 2026</field>
+            <field name="cert_type">material</field>
+            <field name="plant_id" ref="plant_central"/>
+            <field name="partner_id" ref="partner_cement_supplier"/>
+            <field name="reference_no">MAT-OPC-2026-08-44</field>
+            <field name="issuing_body">Alpha Cement Industries QC Lab</field>
+            <field name="scope">Cement compliance with EN 197-1 for delivery batch #44</field>
+            <field name="issue_date">2026-08-01</field>
+            <field name="expiry_date">2027-02-01</field>
+        </record>
+
+        <!-- ══════════════════════════════════════════════════
+             MOISTURE LOGS
+        ══════════════════════════════════════════════════ -->
+        <record id="moisture_log_today" model="ready.mix.moisture">
+            <field name="name">MOI/2026/0089</field>
+            <field name="plant_id" ref="plant_central"/>
+            <field name="log_date">2026-08-27</field>
+            <field name="technician_id" ref="base.user_admin"/>
+            <field name="state">confirmed</field>
+        </record>
+        <record id="moisture_line_1" model="ready.mix.moisture.line">
+            <field name="moisture_id" ref="moisture_log_today"/>
+            <field name="sequence">10</field>
+            <field name="product_id" ref="product_coarse_aggregate"/>
+            <field name="silo_id" ref="silo_coarse_agg"/>
+            <field name="moisture_pct">1.20</field>
+            <field name="absorption_pct">0.50</field>
+        </record>
+        <record id="moisture_line_2" model="ready.mix.moisture.line">
+            <field name="moisture_id" ref="moisture_log_today"/>
+            <field name="sequence">20</field>
+            <field name="product_id" ref="product_fine_aggregate"/>
+            <field name="silo_id" ref="silo_fine_agg"/>
+            <field name="moisture_pct">4.80</field>
+            <field name="absorption_pct">1.20</field>
+        </record>
+
+        <record id="moisture_log_yesterday" model="ready.mix.moisture">
+            <field name="name">MOI/2026/0088</field>
+            <field name="plant_id" ref="plant_central"/>
+            <field name="log_date">2026-08-26</field>
+            <field name="technician_id" ref="base.user_admin"/>
+            <field name="state">confirmed</field>
+        </record>
+        <record id="moisture_line_y1" model="ready.mix.moisture.line">
+            <field name="moisture_id" ref="moisture_log_yesterday"/>
+            <field name="sequence">10</field>
+            <field name="product_id" ref="product_coarse_aggregate"/>
+            <field name="silo_id" ref="silo_coarse_agg"/>
+            <field name="moisture_pct">1.35</field>
+            <field name="absorption_pct">0.50</field>
+        </record>
+        <record id="moisture_line_y2" model="ready.mix.moisture.line">
+            <field name="moisture_id" ref="moisture_log_yesterday"/>
+            <field name="sequence">20</field>
+            <field name="product_id" ref="product_fine_aggregate"/>
+            <field name="silo_id" ref="silo_fine_agg"/>
+            <field name="moisture_pct">5.10</field>
+            <field name="absorption_pct">1.20</field>
+        </record>
+
+        <!-- ══════════════════════════════════════════════════
+             WASHOUT RECORDS
+        ══════════════════════════════════════════════════ -->
+        <record id="washout_01" model="ready.mix.washout">
+            <field name="name">WO/2026/0041</field>
+            <field name="plant_id" ref="plant_central"/>
+            <field name="vehicle_id" ref="fleet.vehicle_1"/>
+            <field name="driver_id" ref="partner_driver_ahmed"/>
+            <field name="washout_date">2026-08-27</field>
+            <field name="washout_time">9.5</field>
+            <field name="load_id" ref="load_marina_01"/>
+            <field name="returned_volume">0.0</field>
+            <field name="washout_water_vol">280.0</field>
+            <field name="waste_disposal_method">reclaim</field>
+            <field name="operator_id" ref="base.user_admin"/>
+            <field name="state">confirmed</field>
+        </record>
+
+        <record id="washout_02" model="ready.mix.washout">
+            <field name="name">WO/2026/0040</field>
+            <field name="plant_id" ref="plant_central"/>
+            <field name="vehicle_id" ref="fleet.vehicle_2"/>
+            <field name="driver_id" ref="partner_driver_mike"/>
+            <field name="washout_date">2026-08-27</field>
+            <field name="washout_time">10.25</field>
+            <field name="load_id" ref="load_marina_02"/>
+            <field name="returned_volume">0.2</field>
+            <field name="washout_water_vol">310.0</field>
+            <field name="waste_disposal_method">reclaim</field>
+            <field name="operator_id" ref="base.user_admin"/>
+            <field name="state">confirmed</field>
+            <field name="environmental_notes">Returned 0.2m³ added to reclaim unit. No overflow recorded.</field>
+        </record>
+
+        <!-- ══════════════════════════════════════════════════
+             COST SHEETS
+        ══════════════════════════════════════════════════ -->
+        <record id="cost_marina_01" model="ready.mix.cost.sheet">
+            <field name="name">CST/2026/0038</field>
+            <field name="load_id" ref="load_marina_01"/>
+            <field name="transport_cost">59.50</field>
+            <field name="driver_cost">12.10</field>
+            <field name="pump_cost">84.00</field>
+            <field name="overhead_cost">35.00</field>
+            <field name="state">confirmed</field>
+        </record>
+
+        <record id="cost_bridge_01" model="ready.mix.cost.sheet">
+            <field name="name">CST/2026/0033</field>
+            <field name="load_id" ref="load_bridge_01"/>
+            <field name="transport_cost">187.0</field>
+            <field name="driver_cost">14.00</field>
+            <field name="pump_cost">91.00</field>
+            <field name="overhead_cost">38.50</field>
+            <field name="state">confirmed</field>
+        </record>
+    </data>
+</odoo>

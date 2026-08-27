@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Ready Mix Operations</title>
+    <style>
+        /* ── Reset ─────────────────────────────────────────────── */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            color: #1e2b3a;
+            background: #f0f3f7;
+            line-height: 1.6;
+        }
+
+        /* ── Variables ─────────────────────────────────────────── */
+        :root {
+            --orange: #e65f1e;
+            --dark:   #1e2837;
+            --blue:   #2c7be5;
+            --green:  #27ae60;
+            --red:    #e74c3c;
+            --grey:   #6c7a8d;
+            --light:  #f0f3f7;
+            --white:  #ffffff;
+        }
+
+        /* ── Banner ─────────────────────────────────────────────── */
+        .banner {
+            width: 100%;
+            display: block;
+            border-radius: 0 0 16px 16px;
+        }
+
+        /* ── Section wrapper ─────────────────────────────────────── */
+        .section {
+            max-width: 1100px;
+            margin: 48px auto;
+            padding: 0 24px;
+        }
+
+        /* ── Section title ───────────────────────────────────────── */
+        .section-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 6px;
+        }
+        .section-title span { color: var(--orange); }
+        .section-sub {
+            font-size: 16px;
+            color: var(--grey);
+            margin-bottom: 32px;
+        }
+        hr.divider {
+            border: none;
+            border-top: 3px solid var(--orange);
+            width: 56px;
+            margin: 12px 0 28px;
+        }
+
+        /* ── Feature grid ────────────────────────────────────────── */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 24px;
+        }
+        .feature-card {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 28px 24px;
+            box-shadow: 0 2px 12px rgba(0,0,0,.07);
+            border-top: 4px solid var(--orange);
+            transition: transform .2s, box-shadow .2s;
+        }
+        .feature-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0,0,0,.12);
+        }
+        .feature-card .icon {
+            font-size: 36px;
+            margin-bottom: 14px;
+        }
+        .feature-card h3 {
+            font-size: 17px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--dark);
+        }
+        .feature-card p {
+            font-size: 14px;
+            color: var(--grey);
+        }
+
+        /* ── Screenshot gallery ─────────────────────────────────── */
+        .gallery {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+        .gallery-item {
+            background: var(--white);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,.09);
+        }
+        .gallery-item img {
+            width: 100%;
+            display: block;
+        }
+        .gallery-caption {
+            padding: 20px 28px;
+            border-top: 1px solid #eaeef3;
+        }
+        .gallery-caption h4 {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 6px;
+            color: var(--dark);
+        }
+        .gallery-caption p {
+            font-size: 14px;
+            color: var(--grey);
+        }
+
+        /* ── Workflow steps ─────────────────────────────────────── */
+        .workflow {
+            display: flex;
+            gap: 0;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 130px;
+            position: relative;
+        }
+        .step + .step::before {
+            content: "→";
+            position: absolute;
+            left: -16px;
+            top: 24px;
+            font-size: 20px;
+            color: var(--orange);
+        }
+        .step-circle {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: var(--orange);
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            margin-bottom: 10px;
+            box-shadow: 0 4px 12px rgba(230,95,30,.35);
+        }
+        .step-label {
+            font-size: 13px;
+            font-weight: 600;
+            text-align: center;
+            color: var(--dark);
+        }
+
+        /* ── Roles table ────────────────────────────────────────── */
+        .roles-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--white);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 12px rgba(0,0,0,.07);
+        }
+        .roles-table th {
+            background: var(--dark);
+            color: var(--white);
+            padding: 14px 18px;
+            font-size: 13px;
+            text-align: left;
+        }
+        .roles-table td {
+            padding: 12px 18px;
+            font-size: 14px;
+            border-bottom: 1px solid #eaeef3;
+            vertical-align: top;
+        }
+        .roles-table tr:last-child td { border-bottom: none; }
+        .roles-table tr:nth-child(even) td { background: #fafbfc; }
+        .badge {
+            display: inline-block;
+            padding: 2px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--white);
+        }
+        .badge.orange { background: var(--orange); }
+        .badge.blue   { background: var(--blue);   }
+        .badge.green  { background: var(--green);  }
+        .badge.dark   { background: var(--dark);   }
+
+        /* ── KPI strip ──────────────────────────────────────────── */
+        .kpi-strip {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 40px 0;
+        }
+        .kpi-box {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 24px 28px;
+            text-align: center;
+            box-shadow: 0 2px 12px rgba(0,0,0,.07);
+            min-width: 160px;
+            border-bottom: 4px solid var(--orange);
+        }
+        .kpi-value {
+            font-size: 38px;
+            font-weight: 800;
+            color: var(--orange);
+            line-height: 1;
+        }
+        .kpi-label {
+            font-size: 13px;
+            color: var(--grey);
+            margin-top: 8px;
+        }
+
+        /* ── Footer ─────────────────────────────────────────────── */
+        footer {
+            background: var(--dark);
+            color: #8a9bae;
+            text-align: center;
+            padding: 32px 24px;
+            font-size: 14px;
+            margin-top: 64px;
+        }
+        footer strong { color: var(--orange); }
+    </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════ BANNER ═══ -->
+<img src="banner.png" alt="Ready Mix Operations Banner" class="banner"/>
+
+<!-- ═══════════════════════════════════════════════════ KEY NUMBERS ═══ -->
+<div class="section">
+    <div class="kpi-strip">
+        <div class="kpi-box"><div class="kpi-value">16</div><div class="kpi-label">Data Models</div></div>
+        <div class="kpi-box"><div class="kpi-value">7</div><div class="kpi-label">User Roles</div></div>
+        <div class="kpi-box"><div class="kpi-value">45</div><div class="kpi-label">Source Files</div></div>
+        <div class="kpi-box"><div class="kpi-value">3</div><div class="kpi-label">Standards<br>(EN 206 / ACI / IS 456)</div></div>
+        <div class="kpi-box"><div class="kpi-value">PDF</div><div class="kpi-label">Load Ticket Report</div></div>
+    </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ OVERVIEW ═══ -->
+<div class="section">
+    <h2 class="section-title">The Complete <span>Ready-Mix Concrete</span> Platform</h2>
+    <hr class="divider"/>
+    <p class="section-sub">
+        Manage every step of your concrete production operation — from the first customer
+        quotation through batching, dispatch, quality testing, and final invoicing —
+        all inside Odoo 19.
+    </p>
+
+    <!-- Workflow -->
+    <div class="workflow">
+        <div class="step">
+            <div class="step-circle">📋</div>
+            <div class="step-label">Sales Order &amp; Rate Agreement</div>
+        </div>
+        <div class="step">
+            <div class="step-circle">📅</div>
+            <div class="step-label">Delivery Schedule</div>
+        </div>
+        <div class="step">
+            <div class="step-circle">🚚</div>
+            <div class="step-label">Dispatch Plan</div>
+        </div>
+        <div class="step">
+            <div class="step-circle">🏭</div>
+            <div class="step-label">Batching &amp; Load Ticket</div>
+        </div>
+        <div class="step">
+            <div class="step-circle">🔬</div>
+            <div class="step-label">QC Tests &amp; Specimens</div>
+        </div>
+        <div class="step">
+            <div class="step-circle">💰</div>
+            <div class="step-label">Cost Sheet &amp; Invoice</div>
+        </div>
+    </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════ FEATURES ═══ -->
+<div class="section">
+    <h2 class="section-title">Key <span>Features</span></h2>
+    <hr class="divider"/>
+    <div class="feature-grid">
+
+        <div class="feature-card">
+            <div class="icon">🏭</div>
+            <h3>Multi-Plant Management</h3>
+            <p>Configure multiple concrete plants, each with its own silos, storage tanks,
+               capacity, quality standard (EN 206 / ACI 318 / IS 456), and cost rates.
+               Live fill-percentage and calibration status per silo.</p>
+        </div>
+
+        <div class="feature-card">
+            <div class="icon">🧪</div>
+            <h3>Mix Design Library</h3>
+            <p>Full concrete mix-design records with grade, target strength, slump limits,
+               W/C ratio, cement content, aggregate size, and ingredient recipe lines.
+               Mandatory approval and consultant sign-off workflow.</p>
+        </div>
+
+        <div class="feature-card">
+            <div class="icon">📍</div>
+            <h3>Job Sites &amp; Rate Agreements</h3>
+            <p>Track customer job sites with GPS address, site contacts, and pump
+               requirements. Lock agreed unit prices per site / plant / mix design
+               with effective date ranges.</p>
+        </div>
+
+        <div class="feature-card">
+            <div class="icon">📅</div>
+            <h3>Delivery Scheduling</h3>
+            <p>Create call-off delivery schedules with requested volume and pour rate.
+               One click auto-generates a sequenced dispatch plan (truck #, planned time,
+               volume) based on fleet capacity.</p>
+        </div>
+
+        <div class="feature-card">
+            <div class="icon">🚛</div>
+            <h3>Dispatch &amp; Fleet</h3>
+            <p>Assign transit mixers, drivers, and pump trucks to each dispatch.
+               Full state lifecycle: Draft → Confirmed → Batching → In Transit →
+               Discharging → Delivered. Direct link to Load Ticket creation.</p>
+        </div>
+
+        <div class="feature-card">
+            <div class="icon">📄</div>
+            <h3>Load Tickets — Core Document</h3>
+            <p>The heart of the system. Tracks batching time, departure, arrival,
+               discharge start/end, drum revolutions, water added, volume ordered vs
+               delivered, material consumption with moisture correction, and auto
+               compliance-breach detection.</p>
+        </div>
+
+        <div class="feature-card">
+            <div class="icon">🔬</div>
+            <h3>Fresh QC Tests</h3>
+            <p>Record slump, air content, temperature, density, and W/C ratio directly
+               against a load ticket. Automatic pass/fail per parameter compared to mix
+               design limits. Failing tests auto-create an NCR.</p>
+        </div>
+
+        <div class="feature-card">
+            <div class="icon">🧊</div>
+            <h3>Cube &amp; Cylinder Specimens</h3>
+            <p>Auto-generated 7-day and 28-day specimen records upon delivery.
+               Record failure load and cross-section area; compressive strength is
+               computed automatically. Failing specimens raise an NCR and can be
+               certified to generate QC certificates.</p>
+        </div>
+
+        <div class="feature-card">
+            <div class="icon">⚠️</div>
+            <h3>NCR / CAPA (8D)</h3>
+            <p>Full non-conformance tracking with severity classification (Minor /
+               Major / Critical), root cause analysis, immediate containment, corrective
+               and preventive actions, and verification workflow.</p>
+        </div>
+
+        <div class="feature-card">
+            <div class="icon">💰</div>
+            <h3>Cost Sheets &amp; Margin</h3>
+            <p>Per-load cost sheets covering material (computed from actual consumption),
+               transport, driver, pump, and overhead — with one-click computation from
+               plant rates. Revenue vs cost margin is tracked and locked on invoicing.</p>
+        </div>
+
+        <div class="feature-card">
+            <div class="icon">💧</div>
+            <h3>Moisture Logs</h3>
+            <p>Daily aggregate moisture log per plant and silo. Free moisture is
+               auto-computed (moisture % − absorption %). Confirmed logs feed into
+               batch-level moisture correction on load material lines.</p>
+        </div>
+
+        <div class="feature-card">
+            <div class="icon">📜</div>
+            <h3>Certificate Register</h3>
+            <p>Color-coded tracking for plant, personnel, and vehicle certificates.
+               Status auto-computed as Valid / Expiring Soon (≤30 days) / Expired.
+               Dedicated view for expiring and expired certificates.</p>
+        </div>
+
+        <div class="feature-card">
+            <div class="icon">♻️</div>
+            <h3>Washout Records</h3>
+            <p>Environmental compliance records for each truck washout: returned
+               concrete volume, washout water used, disposal method, and operator
+               sign-off.</p>
+        </div>
+
+        <div class="feature-card">
+            <div class="icon">🧾</div>
+            <h3>Invoicing Wizard</h3>
+            <p>Group un-invoiced delivered loads by Job Site, Sales Order, Day, Mix
+               Design, or create a single invoice. Generates Odoo invoices with one
+               line per load ticket and marks them as invoiced automatically.</p>
+        </div>
+
+        <div class="feature-card">
+            <div class="icon">📊</div>
+            <h3>Sales Order Integration</h3>
+            <p>Extends the standard Odoo Sales Order with job site, plant, rate
+               agreement, and technical review fields. Smart buttons show linked
+               Schedules and Load Tickets with delivered volume.</p>
+        </div>
+
+        <div class="feature-card">
+            <div class="icon">🖨️</div>
+            <h3>PDF Load Ticket Report</h3>
+            <p>Print-ready delivery ticket with full material consumption table,
+               timeline, moisture corrections, compliance status, and site
+               signature block.</p>
+        </div>
+
+    </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════ SCREENSHOTS ═══ -->
+<div class="section">
+    <h2 class="section-title"><span>Screenshots</span></h2>
+    <hr class="divider"/>
+    <div class="gallery">
+
+        <div class="gallery-item">
+            <img src="screenshot_list.png" alt="Operations Dashboard – Load Ticket List"/>
+            <div class="gallery-caption">
+                <h4>Operations Dashboard — Load Ticket List</h4>
+                <p>At-a-glance KPI strip (loads today, volume, fleet utilisation, QC pass rate,
+                   open NCRs) above a colour-coded load list with live status badges and
+                   invoiced indicators.</p>
+            </div>
+        </div>
+
+        <div class="gallery-item">
+            <img src="screenshot_load.png" alt="Load Ticket Form"/>
+            <div class="gallery-caption">
+                <h4>Load Ticket Form</h4>
+                <p>The core operational document: parties, fleet, volume, pricing, full
+                   timeline with computed durations, material consumption with moisture
+                   correction, and real-time compliance breach detection.</p>
+            </div>
+        </div>
+
+        <div class="gallery-item">
+            <img src="screenshot_qc.png" alt="Quality Control – QC Tests, Specimens, NCR, Certificates"/>
+            <div class="gallery-caption">
+                <h4>Quality Control — Tests, Specimens, NCRs &amp; Certificates</h4>
+                <p>Fresh test results with automatic pass/fail per slump and air content;
+                   specimen compressive-strength results; 8D NCR lifecycle; and the
+                   certificate register with expiry colour coding.</p>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════ ROLES ═══ -->
+<div class="section">
+    <h2 class="section-title">User <span>Roles</span></h2>
+    <hr class="divider"/>
+    <table class="roles-table">
+        <thead>
+            <tr>
+                <th>Role</th>
+                <th>Access Level</th>
+                <th>Primary Responsibilities</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>User</strong></td>
+                <td><span class="badge dark">Read</span></td>
+                <td>View loads, schedules, and reports</td>
+            </tr>
+            <tr>
+                <td><strong>Dispatcher</strong></td>
+                <td><span class="badge blue">Read / Write</span></td>
+                <td>Create and manage delivery schedules and dispatch plans</td>
+            </tr>
+            <tr>
+                <td><strong>Plant Operator</strong></td>
+                <td><span class="badge orange">Read / Write</span></td>
+                <td>Manage silos, batching, load tickets, moisture logs, and washout records</td>
+            </tr>
+            <tr>
+                <td><strong>QC Technician</strong></td>
+                <td><span class="badge blue">Read / Write</span></td>
+                <td>Record fresh tests, enter specimen results, manage NCRs</td>
+            </tr>
+            <tr>
+                <td><strong>QC Manager</strong></td>
+                <td><span class="badge orange">Full QC</span></td>
+                <td>Approve mix designs, close NCRs, issue certificates</td>
+            </tr>
+            <tr>
+                <td><strong>Finance</strong></td>
+                <td><span class="badge blue">Finance</span></td>
+                <td>Manage cost sheets, rate agreements, and run the invoicing wizard</td>
+            </tr>
+            <tr>
+                <td><strong>Manager</strong></td>
+                <td><span class="badge green">Full Access</span></td>
+                <td>All of the above — configure plants, silos, mix designs, and job sites</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- ══════════════════════════════════════════════ TECHNICAL DETAILS ═══ -->
+<div class="section">
+    <h2 class="section-title">Technical <span>Details</span></h2>
+    <hr class="divider"/>
+    <div class="feature-grid" style="grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));">
+        <div class="feature-card" style="border-top-color: var(--blue);">
+            <div class="icon">⚙️</div>
+            <h3>Odoo Version</h3>
+            <p>19.0 Community &amp; Enterprise compatible</p>
+        </div>
+        <div class="feature-card" style="border-top-color: var(--blue);">
+            <div class="icon">📦</div>
+            <h3>Dependencies</h3>
+            <p>sale_management · stock · purchase · account · fleet · portal · mail</p>
+        </div>
+        <div class="feature-card" style="border-top-color: var(--blue);">
+            <div class="icon">📂</div>
+            <h3>Module Name</h3>
+            <p><code>ready_mix_operations</code></p>
+        </div>
+        <div class="feature-card" style="border-top-color: var(--blue);">
+            <div class="icon">⚖️</div>
+            <h3>License</h3>
+            <p>LGPL-3</p>
+        </div>
+    </div>
+</div>
+
+<!-- ═════════════════════════════════════════════════════════ FOOTER ═══ -->
+<footer>
+    <p><strong>Ready Mix Operations</strong> — Built for Odoo 19.0</p>
+    <p style="margin-top:8px;">Complete ready-mix concrete production management, from quotation to invoice.</p>
+</footer>
+
+</body>
+</html>

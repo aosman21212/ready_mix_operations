@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_ready_mix_dispatch_form" model="ir.ui.view">
+        <field name="name">ready.mix.dispatch.form</field>
+        <field name="model">ready.mix.dispatch</field>
+        <field name="arch" type="xml">
+            <form string="Dispatch">
+                <header>
+                    <button name="action_confirm" string="Confirm" type="object"
+                            class="btn-primary" invisible="state != 'draft'"/>
+                    <button name="action_batching" string="Start Batching" type="object"
+                            invisible="state != 'confirmed'"/>
+                    <button name="action_in_transit" string="In Transit" type="object"
+                            invisible="state != 'batching'"/>
+                    <button name="action_discharging" string="Discharging" type="object"
+                            invisible="state != 'in_transit'"/>
+                    <button name="action_create_load" string="Create Load Ticket" type="object"
+                            class="btn-secondary" invisible="load_id != False or state == 'cancelled'"/>
+                    <button name="action_cancel" string="Cancel" type="object"
+                            invisible="state in ('cancelled','delivered')"/>
+                    <field name="state" widget="statusbar"
+                           statusbar_visible="draft,confirmed,batching,in_transit,discharging,delivered"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field name="name" readonly="1"/></h1>
+                        <h3>Truck #<field name="sequence" class="oe_inline"/></h3>
+                    </div>
+                    <group>
+                        <group string="Delivery">
+                            <field name="delivery_date"/>
+                            <field name="planned_time"/>
+                            <field name="partner_id"/>
+                            <field name="jobsite_id"/>
+                            <field name="plant_id"/>
+                            <field name="mix_product_id"/>
+                            <field name="volume"/>
+                            <field name="schedule_id"/>
+                        </group>
+                        <group string="Fleet">
+                            <field name="vehicle_id"/>
+                            <field name="driver_id"/>
+                            <field name="pump_vehicle_id"/>
+                        </group>
+                    </group>
+                    <group string="Load Ticket">
+                        <field name="load_id" readonly="1"/>
+                    </group>
+                    <group string="Notes">
+                        <field name="notes" nolabel="1" colspan="2"/>
+                    </group>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_ready_mix_dispatch_list" model="ir.ui.view">
+        <field name="name">ready.mix.dispatch.list</field>
+        <field name="model">ready.mix.dispatch</field>
+        <field name="arch" type="xml">
+            <list string="Dispatches" decoration-danger="state == 'cancelled'"
+                  decoration-success="state == 'delivered'">
+                <field name="name"/>
+                <field name="delivery_date"/>
+                <field name="planned_time"/>
+                <field name="sequence" string="Truck #"/>
+                <field name="partner_id"/>
+                <field name="plant_id"/>
+                <field name="mix_product_id"/>
+                <field name="volume"/>
+                <field name="vehicle_id"/>
+                <field name="driver_id"/>
+                <field name="load_id"/>
+                <field name="state" widget="badge"
+                       decoration-success="state == 'delivered'"
+                       decoration-info="state in ('in_transit','discharging')"
+                       decoration-warning="state in ('confirmed','batching')"
+                       decoration-muted="state in ('draft','cancelled')"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_ready_mix_dispatch_gantt" model="ir.ui.view">
+        <field name="name">ready.mix.dispatch.gantt</field>
+        <field name="model">ready.mix.dispatch</field>
+        <field name="arch" type="xml">
+            <list string="Dispatch Plan">
+                <field name="name"/>
+                <field name="delivery_date"/>
+                <field name="planned_time"/>
+                <field name="vehicle_id"/>
+                <field name="driver_id"/>
+                <field name="volume"/>
+                <field name="state" widget="badge"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="action_ready_mix_dispatch" model="ir.actions.act_window">
+        <field name="name">Dispatch Plan</field>
+        <field name="res_model">ready.mix.dispatch</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>

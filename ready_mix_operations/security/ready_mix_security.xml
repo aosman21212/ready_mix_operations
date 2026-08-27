@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Groups -->
+        <record id="group_ready_mix_user" model="res.groups">
+            <field name="name">Ready Mix / User</field>
+        </record>
+        <record id="group_ready_mix_dispatcher" model="res.groups">
+            <field name="name">Ready Mix / Dispatcher</field>
+            <field name="implied_ids" eval="[(4, ref('group_ready_mix_user'))]"/>
+        </record>
+        <record id="group_ready_mix_plant_operator" model="res.groups">
+            <field name="name">Ready Mix / Plant Operator</field>
+            <field name="implied_ids" eval="[(4, ref('group_ready_mix_user'))]"/>
+        </record>
+        <record id="group_ready_mix_qc" model="res.groups">
+            <field name="name">Ready Mix / QC Technician</field>
+            <field name="implied_ids" eval="[(4, ref('group_ready_mix_user'))]"/>
+        </record>
+        <record id="group_ready_mix_qc_manager" model="res.groups">
+            <field name="name">Ready Mix / QC Manager</field>
+            <field name="implied_ids" eval="[(4, ref('group_ready_mix_qc'))]"/>
+        </record>
+        <record id="group_ready_mix_finance" model="res.groups">
+            <field name="name">Ready Mix / Finance</field>
+            <field name="implied_ids" eval="[(4, ref('group_ready_mix_user'))]"/>
+        </record>
+        <record id="group_ready_mix_manager" model="res.groups">
+            <field name="name">Ready Mix / Manager</field>
+            <field name="implied_ids" eval="[(4, ref('group_ready_mix_dispatcher')),
+                                             (4, ref('group_ready_mix_plant_operator')),
+                                             (4, ref('group_ready_mix_qc_manager')),
+                                             (4, ref('group_ready_mix_finance'))]"/>
+        </record>
+    </data>
+</odoo>

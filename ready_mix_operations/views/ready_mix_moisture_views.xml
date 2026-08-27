@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_ready_mix_moisture_form" model="ir.ui.view">
+        <field name="name">ready.mix.moisture.form</field>
+        <field name="model">ready.mix.moisture</field>
+        <field name="arch" type="xml">
+            <form string="Moisture Log">
+                <header>
+                    <button name="action_confirm" string="Confirm" type="object"
+                            class="btn-primary" invisible="state != 'draft'"/>
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field name="name" readonly="1"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="plant_id"/>
+                            <field name="log_date"/>
+                            <field name="technician_id"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Moisture Readings">
+                            <field name="line_ids">
+                                <list editable="bottom">
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="product_id"/>
+                                    <field name="silo_id"/>
+                                    <field name="moisture_pct"/>
+                                    <field name="absorption_pct"/>
+                                    <field name="free_moisture" readonly="1"/>
+                                    <field name="notes"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Notes">
+                            <field name="notes" placeholder="Remarks..."/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_ready_mix_moisture_list" model="ir.ui.view">
+        <field name="name">ready.mix.moisture.list</field>
+        <field name="model">ready.mix.moisture</field>
+        <field name="arch" type="xml">
+            <list string="Moisture Logs">
+                <field name="name"/>
+                <field name="log_date"/>
+                <field name="plant_id"/>
+                <field name="technician_id"/>
+                <field name="state" widget="badge"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="action_ready_mix_moisture" model="ir.actions.act_window">
+        <field name="name">Moisture Logs</field>
+        <field name="res_model">ready.mix.moisture</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>

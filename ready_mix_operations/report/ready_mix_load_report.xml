@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_report_ready_mix_load" model="ir.actions.report">
+        <field name="name">Load Ticket</field>
+        <field name="model">ready.mix.load</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">ready_mix_operations.report_load_ticket</field>
+        <field name="report_file">ready_mix_operations.report_load_ticket</field>
+        <field name="binding_model_id" ref="model_ready_mix_load"/>
+        <field name="binding_type">report</field>
+    </record>
+</odoo>

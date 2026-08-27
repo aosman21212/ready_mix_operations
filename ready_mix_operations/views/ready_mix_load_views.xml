@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_ready_mix_load_form" model="ir.ui.view">
+        <field name="name">ready.mix.load.form</field>
+        <field name="model">ready.mix.load</field>
+        <field name="arch" type="xml">
+            <form string="Load Ticket">
+                <header>
+                    <button name="action_batching" string="Start Batching" type="object"
+                            class="btn-primary" invisible="state != 'draft'"/>
+                    <button name="action_in_transit" string="Truck Departed" type="object"
+                            class="btn-primary" invisible="state != 'batching'"/>
+                    <button name="action_discharging" string="Discharging" type="object"
+                            class="btn-primary" invisible="state != 'in_transit'"/>
+                    <button name="action_delivered" string="Delivered" type="object"
+                            class="btn-success" invisible="state != 'discharging'"/>
+                    <button name="action_cancel" string="Cancel" type="object"
+                            invisible="state in ('delivered','cancelled')"/>
+                    <field name="state" widget="statusbar"
+                           statusbar_visible="draft,batching,in_transit,discharging,delivered"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_view_qc_tests" type="object"
+                                class="oe_stat_button" icon="fa-flask">
+                            <field name="qc_test_count" widget="statinfo" string="QC Tests"/>
+                        </button>
+                        <button name="action_view_samples" type="object"
+                                class="oe_stat_button" icon="fa-cube">
+                            <field name="sample_count" widget="statinfo" string="Specimens"/>
+                        </button>
+                        <button name="action_view_ncrs" type="object"
+                                class="oe_stat_button" icon="fa-exclamation-triangle">
+                            <field name="ncr_count" widget="statinfo" string="NCRs"/>
+                        </button>
+                        <button name="action_create_cost_sheet" type="object"
+                                class="oe_stat_button" icon="fa-money">
+                            <div class="o_field_widget o_stat_info">
+                                <span class="o_stat_text">Cost Sheet</span>
+                            </div>
+                        </button>
+                    </div>
+                    <widget name="web_ribbon" title="Compliance Breach"
+                            bg_color="bg-danger"
+                            invisible="not compliance_breach"/>
+                    <widget name="web_ribbon" title="Invoiced"
+                            bg_color="bg-success"
+                            invisible="not invoiced"/>
+                    <div class="oe_title">
+                        <h1><field name="name" readonly="1"/></h1>
+                    </div>
+                    <group>
+                        <group string="Parties">
+                            <field name="partner_id"/>
+                            <field name="jobsite_id"/>
+                            <field name="plant_id"/>
+                            <field name="mix_product_id"/>
+                            <field name="sale_order_id"/>
+                            <field name="dispatch_id"/>
+                        </group>
+                        <group string="Fleet">
+                            <field name="vehicle_id"/>
+                            <field name="driver_id"/>
+                            <field name="pump_vehicle_id"/>
+                            <field name="pump_operator_id"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group string="Volume">
+                            <field name="delivery_date"/>
+                            <field name="volume_ordered"/>
+                            <field name="volume_delivered"/>
+                            <field name="volume_returned"/>
+                        </group>
+                        <group string="Pricing">
+                            <field name="unit_price"/>
+                            <field name="subtotal" readonly="1"/>
+                            <field name="invoiced" readonly="1"/>
+                            <field name="invoice_id" readonly="1"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Timeline">
+                            <group>
+                                <group>
+                                    <field name="batching_time"/>
+                                    <field name="departure_time"/>
+                                    <field name="arrival_time"/>
+                                    <field name="discharge_start_time"/>
+                                    <field name="discharge_end_time"/>
+                                    <field name="return_time"/>
+                                </group>
+                                <group>
+                                    <field name="transit_duration" readonly="1"/>
+                                    <field name="waiting_duration" readonly="1"/>
+                                    <field name="discharge_duration" readonly="1"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Mix &amp; Compliance">
+                            <group>
+                                <group>
+                                    <field name="drum_revolutions"/>
+                                    <field name="water_added_site"/>
+                                    <field name="wc_ratio_actual"/>
+                                </group>
+                                <group>
+                                    <field name="compliance_breach" readonly="1" widget="boolean_toggle"/>
+                                    <field name="compliance_notes" readonly="1"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Material Consumption">
+                            <field name="material_line_ids">
+                                <list editable="bottom">
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="product_id"/>
+                                    <field name="silo_id"/>
+                                    <field name="target_qty"/>
+                                    <field name="actual_qty"/>
+                                    <field name="moisture_pct"/>
+                                    <field name="moisture_corrected_qty" readonly="1"/>
+                                    <field name="variance" readonly="1"
+                                           decoration-danger="variance &gt; 10 or variance &lt; -10"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Signature">
+                            <group>
+                                <field name="signed_by"/>
+                                <field name="signed_time"/>
+                            </group>
+                        </page>
+                        <page string="Notes">
+                            <field name="notes" placeholder="Remarks..."/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_ready_mix_load_list" model="ir.ui.view">
+        <field name="name">ready.mix.load.list</field>
+        <field name="model">ready.mix.load</field>
+        <field name="arch" type="xml">
+            <list string="Load Tickets" decoration-danger="compliance_breach"
+                  decoration-muted="state == 'cancelled'">
+                <field name="name"/>
+                <field name="delivery_date"/>
+                <field name="partner_id"/>
+                <field name="jobsite_id"/>
+                <field name="plant_id"/>
+                <field name="mix_product_id"/>
+                <field name="vehicle_id"/>
+                <field name="volume_ordered"/>
+                <field name="volume_delivered"/>
+                <field name="subtotal" sum="Total"/>
+                <field name="compliance_breach" widget="boolean_toggle" optional="show"/>
+                <field name="invoiced" widget="boolean_toggle" optional="show"/>
+                <field name="state" widget="badge"
+                       decoration-success="state == 'delivered'"
+                       decoration-info="state in ('in_transit','discharging')"
+                       decoration-warning="state in ('batching','draft')"
+                       decoration-muted="state == 'cancelled'"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_ready_mix_load_search" model="ir.ui.view">
+        <field name="name">ready.mix.load.search</field>
+        <field name="model">ready.mix.load</field>
+        <field name="arch" type="xml">
+            <search string="Load Tickets">
+                <field name="name"/>
+                <field name="partner_id"/>
+                <field name="plant_id"/>
+                <field name="mix_product_id"/>
+                <field name="vehicle_id"/>
+                <filter string="Today" name="today" domain="[('delivery_date','=',context_today())]"/>
+                <filter string="Delivered" name="delivered" domain="[('state','=','delivered')]"/>
+                <filter string="Not Invoiced" name="not_invoiced"
+                        domain="[('state','=','delivered'),('invoiced','=',False)]"/>
+                <filter string="Compliance Breach" name="breach"
+                        domain="[('compliance_breach','=',True)]"/>
+                <separator/>
+                <group>
+                    <filter string="Customer" name="group_customer" context="{'group_by':'partner_id'}"/>
+                    <filter string="Plant" name="group_plant" context="{'group_by':'plant_id'}"/>
+                    <filter string="Date" name="group_date" context="{'group_by':'delivery_date'}"/>
+                    <filter string="Mix Design" name="group_mix" context="{'group_by':'mix_product_id'}"/>
+                    <filter string="Status" name="group_state" context="{'group_by':'state'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_ready_mix_load" model="ir.actions.act_window">
+        <field name="name">Load Tickets</field>
+        <field name="res_model">ready.mix.load</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="view_ready_mix_load_search"/>
+    </record>
+
+    <record id="action_ready_mix_load_today" model="ir.actions.act_window">
+        <field name="name">Today's Loads</field>
+        <field name="res_model">ready.mix.load</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[('delivery_date','=',context_today())]</field>
+        <field name="search_view_id" ref="view_ready_mix_load_search"/>
+    </record>
+</odoo>

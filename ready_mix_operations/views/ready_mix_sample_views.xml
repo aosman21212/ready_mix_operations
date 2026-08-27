@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_ready_mix_sample_form" model="ir.ui.view">
+        <field name="name">ready.mix.sample.form</field>
+        <field name="model">ready.mix.sample</field>
+        <field name="arch" type="xml">
+            <form string="Specimen">
+                <header>
+                    <button name="action_record_test" string="Record Test" type="object"
+                            class="btn-primary" invisible="state != 'pending'"/>
+                    <button name="action_certify" string="Issue Certificate" type="object"
+                            invisible="state != 'tested'"/>
+                    <field name="state" widget="statusbar" statusbar_visible="pending,tested,certified"/>
+                </header>
+                <sheet>
+                    <widget name="web_ribbon" title="FAIL" bg_color="bg-danger"
+                            invisible="result != 'fail'"/>
+                    <widget name="web_ribbon" title="PASS" bg_color="bg-success"
+                            invisible="result != 'pass'"/>
+                    <div class="oe_title">
+                        <h1><field name="name" readonly="1"/></h1>
+                    </div>
+                    <group>
+                        <group string="Reference">
+                            <field name="load_id"/>
+                            <field name="mix_product_id" readonly="1"/>
+                            <field name="plant_id" readonly="1"/>
+                            <field name="sample_type"/>
+                            <field name="sample_date"/>
+                            <field name="technician_id"/>
+                        </group>
+                        <group string="Test Schedule">
+                            <field name="test_age_days"/>
+                            <field name="test_due_date"/>
+                            <field name="test_date"/>
+                        </group>
+                    </group>
+                    <group string="Results">
+                        <group>
+                            <field name="failure_load_kn"/>
+                            <field name="cross_section_area"/>
+                            <field name="compressive_strength" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="target_strength" readonly="1"/>
+                            <field name="result" widget="badge" readonly="1"
+                                   decoration-success="result == 'pass'"
+                                   decoration-danger="result == 'fail'"
+                                   decoration-warning="result == 'pending'"/>
+                            <field name="certificate_issued" readonly="1"/>
+                            <field name="ncr_id" readonly="1"/>
+                        </group>
+                    </group>
+                    <group string="Notes">
+                        <field name="notes" nolabel="1" colspan="2"/>
+                    </group>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_ready_mix_sample_list" model="ir.ui.view">
+        <field name="name">ready.mix.sample.list</field>
+        <field name="model">ready.mix.sample</field>
+        <field name="arch" type="xml">
+            <list string="Specimens" decoration-danger="result == 'fail'"
+                  decoration-warning="test_due_date and test_due_date &lt;= context_today() and state == 'pending'">
+                <field name="name"/>
+                <field name="load_id"/>
+                <field name="sample_type"/>
+                <field name="sample_date"/>
+                <field name="test_age_days"/>
+                <field name="test_due_date"/>
+                <field name="test_date"/>
+                <field name="compressive_strength"/>
+                <field name="target_strength"/>
+                <field name="result" widget="badge"
+                       decoration-success="result == 'pass'"
+                       decoration-danger="result == 'fail'"
+                       decoration-warning="result == 'pending'"/>
+                <field name="state" widget="badge"/>
+                <field name="certificate_issued" optional="show"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="action_ready_mix_sample" model="ir.actions.act_window">
+        <field name="name">Specimens</field>
+        <field name="res_model">ready.mix.sample</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <record id="action_ready_mix_sample_due" model="ir.actions.act_window">
+        <field name="name">Tests Due</field>
+        <field name="res_model">ready.mix.sample</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[('state','=','pending'),('test_due_date','&lt;=',context_today())]</field>
+    </record>
+</odoo>

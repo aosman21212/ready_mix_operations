@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_ready_mix_schedule_form" model="ir.ui.view">
+        <field name="name">ready.mix.schedule.form</field>
+        <field name="model">ready.mix.schedule</field>
+        <field name="arch" type="xml">
+            <form string="Delivery Schedule">
+                <header>
+                    <button name="action_confirm" string="Confirm" type="object"
+                            class="btn-primary" invisible="state != 'draft'"/>
+                    <button name="action_generate_dispatches" string="Generate Dispatches"
+                            type="object" invisible="state != 'confirmed'"/>
+                    <button name="action_complete" string="Mark Complete" type="object"
+                            invisible="state not in ('dispatched','confirmed')"/>
+                    <button name="action_cancel" string="Cancel" type="object"
+                            invisible="state in ('cancelled','completed')"/>
+                    <field name="state" widget="statusbar"
+                           statusbar_visible="draft,confirmed,dispatched,completed"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_view_dispatches" type="object"
+                                class="oe_stat_button" icon="fa-send">
+                            <field name="dispatch_count" widget="statinfo" string="Dispatches"/>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <h1><field name="name" readonly="1"/></h1>
+                    </div>
+                    <group>
+                        <group string="Order Details">
+                            <field name="partner_id"/>
+                            <field name="jobsite_id"/>
+                            <field name="plant_id"/>
+                            <field name="mix_product_id"/>
+                            <field name="sale_order_id"/>
+                        </group>
+                        <group string="Delivery Details">
+                            <field name="delivery_date"/>
+                            <field name="start_time"/>
+                            <field name="requested_volume"/>
+                            <field name="pour_rate"/>
+                            <field name="pump_required"/>
+                        </group>
+                    </group>
+                    <group string="Notes">
+                        <field name="notes" nolabel="1" colspan="2"/>
+                    </group>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_ready_mix_schedule_list" model="ir.ui.view">
+        <field name="name">ready.mix.schedule.list</field>
+        <field name="model">ready.mix.schedule</field>
+        <field name="arch" type="xml">
+            <list string="Delivery Schedules">
+                <field name="name"/>
+                <field name="delivery_date"/>
+                <field name="partner_id"/>
+                <field name="jobsite_id"/>
+                <field name="plant_id"/>
+                <field name="mix_product_id"/>
+                <field name="requested_volume"/>
+                <field name="dispatch_count"/>
+                <field name="state" widget="badge"
+                       decoration-success="state == 'completed'"
+                       decoration-info="state == 'dispatched'"
+                       decoration-warning="state == 'confirmed'"
+                       decoration-muted="state in ('cancelled','draft')"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_ready_mix_schedule_calendar" model="ir.ui.view">
+        <field name="name">ready.mix.schedule.calendar</field>
+        <field name="model">ready.mix.schedule</field>
+        <field name="arch" type="xml">
+            <calendar string="Delivery Schedules" date_start="delivery_date"
+                      color="plant_id" mode="month">
+                <field name="partner_id"/>
+                <field name="mix_product_id"/>
+                <field name="requested_volume"/>
+                <field name="state"/>
+            </calendar>
+        </field>
+    </record>
+
+    <record id="action_ready_mix_schedule" model="ir.actions.act_window">
+        <field name="name">Delivery Schedules</field>
+        <field name="res_model">ready.mix.schedule</field>
+        <field name="view_mode">list,calendar,form</field>
+    </record>
+</odoo>

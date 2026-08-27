@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Root Menu — no groups restriction so it appears in the home screen for all users;
+         sub-menus enforce per-role access. -->
+    <menuitem id="menu_ready_mix_root"
+              name="Ready Mix"
+              sequence="52"
+              web_icon="ready_mix_operations,static/description/icon.png"/>
+
+    <!-- Operations -->
+    <menuitem id="menu_ready_mix_operations"
+              name="Operations"
+              parent="menu_ready_mix_root"
+              sequence="10"/>
+
+    <menuitem id="menu_ready_mix_dashboard"
+              name="Dashboard"
+              parent="menu_ready_mix_operations"
+              action="action_ready_mix_dashboard"
+              sequence="1"/>
+
+    <menuitem id="menu_ready_mix_load"
+              name="Load Tickets"
+              parent="menu_ready_mix_operations"
+              action="action_ready_mix_load"
+              sequence="5"/>
+
+    <menuitem id="menu_ready_mix_load_today"
+              name="Today's Loads"
+              parent="menu_ready_mix_operations"
+              action="action_ready_mix_load_today"
+              sequence="6"/>
+
+    <menuitem id="menu_ready_mix_dispatch"
+              name="Dispatch Plan"
+              parent="menu_ready_mix_operations"
+              action="action_ready_mix_dispatch"
+              sequence="10"/>
+
+    <menuitem id="menu_ready_mix_schedule"
+              name="Delivery Schedules"
+              parent="menu_ready_mix_operations"
+              action="action_ready_mix_schedule"
+              sequence="15"/>
+
+    <!-- Quality -->
+    <menuitem id="menu_ready_mix_quality"
+              name="Quality"
+              parent="menu_ready_mix_root"
+              sequence="20"
+              groups="ready_mix_operations.group_ready_mix_qc"/>
+
+    <menuitem id="menu_ready_mix_qc_test"
+              name="Fresh QC Tests"
+              parent="menu_ready_mix_quality"
+              action="action_ready_mix_qc_test"
+              sequence="10"/>
+
+    <menuitem id="menu_ready_mix_sample"
+              name="Specimens"
+              parent="menu_ready_mix_quality"
+              action="action_ready_mix_sample"
+              sequence="15"/>
+
+    <menuitem id="menu_ready_mix_sample_due"
+              name="Tests Due"
+              parent="menu_ready_mix_quality"
+              action="action_ready_mix_sample_due"
+              sequence="17"/>
+
+    <menuitem id="menu_ready_mix_ncr"
+              name="NCR / CAPA"
+              parent="menu_ready_mix_quality"
+              action="action_ready_mix_ncr"
+              sequence="20"/>
+
+    <menuitem id="menu_ready_mix_ncr_open"
+              name="Open NCRs"
+              parent="menu_ready_mix_quality"
+              action="action_ready_mix_ncr_open"
+              sequence="22"/>
+
+    <!-- Finance -->
+    <menuitem id="menu_ready_mix_finance"
+              name="Finance"
+              parent="menu_ready_mix_root"
+              sequence="30"
+              groups="ready_mix_operations.group_ready_mix_finance"/>
+
+    <menuitem id="menu_ready_mix_cost"
+              name="Cost Sheets"
+              parent="menu_ready_mix_finance"
+              action="action_ready_mix_cost"
+              sequence="10"/>
+
+    <menuitem id="menu_ready_mix_rate_agreement"
+              name="Rate Agreements"
+              parent="menu_ready_mix_finance"
+              action="action_ready_mix_rate_agreement"
+              sequence="20"/>
+
+    <!-- Compliance -->
+    <menuitem id="menu_ready_mix_compliance"
+              name="Compliance"
+              parent="menu_ready_mix_root"
+              sequence="40"/>
+
+    <menuitem id="menu_ready_mix_certificate"
+              name="Certificates"
+              parent="menu_ready_mix_compliance"
+              action="action_ready_mix_certificate"
+              sequence="10"/>
+
+    <menuitem id="menu_ready_mix_certificate_expiring"
+              name="Expiring / Expired"
+              parent="menu_ready_mix_compliance"
+              action="action_ready_mix_certificate_expiring"
+              sequence="12"/>
+
+    <menuitem id="menu_ready_mix_moisture"
+              name="Moisture Logs"
+              parent="menu_ready_mix_compliance"
+              action="action_ready_mix_moisture"
+              sequence="20"/>
+
+    <menuitem id="menu_ready_mix_washout"
+              name="Washout Records"
+              parent="menu_ready_mix_compliance"
+              action="action_ready_mix_washout"
+              sequence="30"/>
+
+    <!-- Configuration -->
+    <menuitem id="menu_ready_mix_config"
+              name="Configuration"
+              parent="menu_ready_mix_root"
+              sequence="90"
+              groups="ready_mix_operations.group_ready_mix_manager"/>
+
+    <menuitem id="menu_ready_mix_plant"
+              name="Plants"
+              parent="menu_ready_mix_config"
+              action="action_ready_mix_plant"
+              sequence="10"/>
+
+    <menuitem id="menu_ready_mix_silo"
+              name="Silos / Storage"
+              parent="menu_ready_mix_config"
+              action="action_ready_mix_silo"
+              sequence="15"/>
+
+    <menuitem id="menu_ready_mix_product"
+              name="Mix Designs"
+              parent="menu_ready_mix_config"
+              action="action_ready_mix_product"
+              sequence="20"/>
+
+    <menuitem id="menu_ready_mix_jobsite"
+              name="Job Sites"
+              parent="menu_ready_mix_config"
+              action="action_ready_mix_jobsite"
+              sequence="30"/>
+</odoo>

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_ready_mix_product_form" model="ir.ui.view">
+        <field name="name">ready.mix.product.form</field>
+        <field name="model">ready.mix.product</field>
+        <field name="arch" type="xml">
+            <form string="Mix Design">
+                <header>
+                    <button name="action_approve" string="Approve" type="object"
+                            class="btn-primary" invisible="state != 'draft'"
+                            groups="ready_mix_operations.group_ready_mix_qc_manager"/>
+                    <button name="action_draft" string="Set to Draft" type="object"
+                            invisible="state != 'approved'"/>
+                    <button name="action_archive" string="Archive" type="object"
+                            invisible="state == 'archived'"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,approved"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field name="name" placeholder="Mix Design Name"/></h1>
+                        <h2><field name="code" placeholder="Mix Code"/></h2>
+                    </div>
+                    <group>
+                        <group string="Identification">
+                            <field name="product_id"/>
+                            <field name="grade"/>
+                            <field name="exposure_class"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                        </group>
+                        <group string="Strength &amp; Composition">
+                            <field name="compressive_strength"/>
+                            <field name="max_wc_ratio"/>
+                            <field name="cement_content"/>
+                            <field name="max_aggregate_size"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group string="Slump Limits">
+                            <field name="slump_min"/>
+                            <field name="slump_max"/>
+                        </group>
+                        <group string="Air Content">
+                            <field name="air_content_min"/>
+                            <field name="air_content_max"/>
+                        </group>
+                    </group>
+                    <group string="Approval">
+                        <group>
+                            <field name="approved_by" readonly="1"/>
+                            <field name="approval_date" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="consultant_approved"/>
+                            <field name="consultant_name" invisible="not consultant_approved"/>
+                            <field name="consultant_date" invisible="not consultant_approved"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Recipe Lines">
+                            <field name="recipe_line_ids">
+                                <list editable="bottom">
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="product_id"/>
+                                    <field name="silo_id"/>
+                                    <field name="quantity"/>
+                                    <field name="uom_id"/>
+                                    <field name="moisture_correction"/>
+                                    <field name="notes"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Technical Notes">
+                            <field name="notes" placeholder="Technical notes..."/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_ready_mix_product_list" model="ir.ui.view">
+        <field name="name">ready.mix.product.list</field>
+        <field name="model">ready.mix.product</field>
+        <field name="arch" type="xml">
+            <list string="Mix Designs">
+                <field name="name"/>
+                <field name="code"/>
+                <field name="grade"/>
+                <field name="compressive_strength"/>
+                <field name="slump_min"/>
+                <field name="slump_max"/>
+                <field name="max_wc_ratio"/>
+                <field name="state" widget="badge"
+                       decoration-success="state == 'approved'"
+                       decoration-warning="state == 'draft'"
+                       decoration-muted="state == 'archived'"/>
+                <field name="consultant_approved" widget="boolean_toggle"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="action_ready_mix_product" model="ir.actions.act_window">
+        <field name="name">Mix Designs</field>
+        <field name="res_model">ready.mix.product</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[('active','in',[True,False])]</field>
+    </record>
+</odoo>

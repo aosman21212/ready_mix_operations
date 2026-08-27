@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_ready_mix_ncr_form" model="ir.ui.view">
+        <field name="name">ready.mix.ncr.form</field>
+        <field name="model">ready.mix.ncr</field>
+        <field name="arch" type="xml">
+            <form string="NCR / CAPA">
+                <header>
+                    <button name="action_in_progress" string="Start Investigation" type="object"
+                            class="btn-primary" invisible="state != 'open'"/>
+                    <button name="action_pending_verification" string="Pending Verification"
+                            type="object" invisible="state != 'in_progress'"/>
+                    <button name="action_close" string="Close NCR" type="object"
+                            class="btn-success" invisible="state != 'pending_verification'"/>
+                    <button name="action_reopen" string="Re-open" type="object"
+                            invisible="state not in ('closed','cancelled')"/>
+                    <button name="action_cancel" string="Cancel" type="object"
+                            invisible="state in ('closed','cancelled')"/>
+                    <field name="state" widget="statusbar"
+                           statusbar_visible="open,in_progress,pending_verification,closed"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field name="name" readonly="1"/></h1>
+                    </div>
+                    <group>
+                        <group string="Details">
+                            <field name="load_id"/>
+                            <field name="plant_id" readonly="1"/>
+                            <field name="date"/>
+                            <field name="source"/>
+                            <field name="severity" widget="badge"
+                                   decoration-warning="severity == 'minor'"
+                                   decoration-danger="severity in ('major','critical')"/>
+                        </group>
+                        <group string="Responsibility">
+                            <field name="responsible_id"/>
+                            <field name="target_close_date"/>
+                            <field name="actual_close_date" readonly="1"/>
+                            <field name="verified_by" readonly="1"/>
+                            <field name="verification_date" readonly="1"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Non-Conformance">
+                            <group>
+                                <field name="description" nolabel="1" colspan="2"
+                                       placeholder="Describe the non-conformance..."/>
+                            </group>
+                        </page>
+                        <page string="Root Cause (8D)">
+                            <group>
+                                <field name="root_cause" nolabel="1" colspan="2"
+                                       placeholder="Root cause analysis..."/>
+                            </group>
+                        </page>
+                        <page string="Actions">
+                            <group string="Immediate / Containment Action">
+                                <field name="immediate_action" nolabel="1" colspan="2"/>
+                            </group>
+                            <group string="Corrective Action (CAPA)">
+                                <field name="corrective_action" nolabel="1" colspan="2"/>
+                            </group>
+                            <group string="Preventive Action">
+                                <field name="preventive_action" nolabel="1" colspan="2"/>
+                            </group>
+                        </page>
+                        <page string="Notes">
+                            <field name="notes" nolabel="1" colspan="2"/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_ready_mix_ncr_list" model="ir.ui.view">
+        <field name="name">ready.mix.ncr.list</field>
+        <field name="model">ready.mix.ncr</field>
+        <field name="arch" type="xml">
+            <list string="NCRs" decoration-danger="severity == 'critical'"
+                  decoration-warning="severity == 'major'">
+                <field name="name"/>
+                <field name="date"/>
+                <field name="load_id"/>
+                <field name="plant_id"/>
+                <field name="source"/>
+                <field name="severity" widget="badge"
+                       decoration-warning="severity == 'minor'"
+                       decoration-danger="severity in ('major','critical')"/>
+                <field name="responsible_id"/>
+                <field name="target_close_date"/>
+                <field name="state" widget="badge"
+                       decoration-success="state == 'closed'"
+                       decoration-warning="state in ('open','in_progress')"
+                       decoration-info="state == 'pending_verification'"
+                       decoration-muted="state == 'cancelled'"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="action_ready_mix_ncr" model="ir.actions.act_window">
+        <field name="name">NCR / CAPA</field>
+        <field name="res_model">ready.mix.ncr</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <record id="action_ready_mix_ncr_open" model="ir.actions.act_window">
+        <field name="name">Open NCRs</field>
+        <field name="res_model">ready.mix.ncr</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[('state','not in',['closed','cancelled'])]</field>
+    </record>
+</odoo>

@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_load_ticket">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <!-- Header -->
+                        <div class="row mb-4">
+                            <div class="col-6">
+                                <h2 class="text-primary">CONCRETE DELIVERY TICKET</h2>
+                                <h3><t t-esc="o.name"/></h3>
+                            </div>
+                            <div class="col-6 text-end">
+                                <span class="badge bg-secondary" style="font-size:14px;">
+                                    <t t-esc="dict(o._fields['state'].selection).get(o.state, o.state)"/>
+                                </span>
+                                <t t-if="o.compliance_breach">
+                                    <br/>
+                                    <span class="badge bg-danger mt-1">COMPLIANCE BREACH</span>
+                                </t>
+                            </div>
+                        </div>
+
+                        <hr/>
+
+                        <!-- Parties -->
+                        <div class="row mb-3">
+                            <div class="col-6">
+                                <table class="table table-sm table-borderless">
+                                    <tr><th colspan="2" class="bg-light">Delivery Details</th></tr>
+                                    <tr><td><strong>Customer:</strong></td><td><t t-esc="o.partner_id.name"/></td></tr>
+                                    <tr><td><strong>Job Site:</strong></td><td><t t-esc="o.jobsite_id.name or '-'"/></td></tr>
+                                    <tr><td><strong>Plant:</strong></td><td><t t-esc="o.plant_id.name"/></td></tr>
+                                    <tr><td><strong>Mix Design:</strong></td><td><t t-esc="o.mix_product_id.name"/></td></tr>
+                                    <tr><td><strong>Grade:</strong></td><td><t t-esc="o.mix_product_id.grade or '-'"/></td></tr>
+                                    <tr><td><strong>Date:</strong></td><td><t t-esc="o.delivery_date"/></td></tr>
+                                </table>
+                            </div>
+                            <div class="col-6">
+                                <table class="table table-sm table-borderless">
+                                    <tr><th colspan="2" class="bg-light">Fleet</th></tr>
+                                    <tr><td><strong>Truck:</strong></td><td><t t-esc="o.vehicle_id.name or '-'"/></td></tr>
+                                    <tr><td><strong>Driver:</strong></td><td><t t-esc="o.driver_id.name or '-'"/></td></tr>
+                                    <tr><td><strong>Pump:</strong></td><td><t t-esc="o.pump_vehicle_id.name or '-'"/></td></tr>
+                                    <tr><td><strong>Vol. Ordered (m³):</strong></td><td><t t-esc="'%.2f' % o.volume_ordered"/></td></tr>
+                                    <tr><td><strong>Vol. Delivered (m³):</strong></td><td><strong><t t-esc="'%.2f' % o.volume_delivered"/></strong></td></tr>
+                                    <tr><td><strong>Drum Revolutions:</strong></td><td><t t-esc="o.drum_revolutions"/></td></tr>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- Timeline -->
+                        <div class="row mb-3">
+                            <div class="col-12">
+                                <table class="table table-sm table-bordered">
+                                    <thead class="table-secondary">
+                                        <tr>
+                                            <th>Batching</th>
+                                            <th>Departure</th>
+                                            <th>Arrival</th>
+                                            <th>Discharge Start</th>
+                                            <th>Discharge End</th>
+                                            <th>Transit (min)</th>
+                                            <th>Wait (min)</th>
+                                            <th>Discharge (min)</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><t t-esc="o.batching_time or '-'"/></td>
+                                            <td><t t-esc="o.departure_time or '-'"/></td>
+                                            <td><t t-esc="o.arrival_time or '-'"/></td>
+                                            <td><t t-esc="o.discharge_start_time or '-'"/></td>
+                                            <td><t t-esc="o.discharge_end_time or '-'"/></td>
+                                            <td><t t-esc="'%.0f' % o.transit_duration"/></td>
+                                            <td><t t-esc="'%.0f' % o.waiting_duration"/></td>
+                                            <td><t t-esc="'%.0f' % o.discharge_duration"/></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- Material Consumption -->
+                        <t t-if="o.material_line_ids">
+                            <div class="row mb-3">
+                                <div class="col-12">
+                                    <h5>Material Consumption</h5>
+                                    <table class="table table-sm table-bordered">
+                                        <thead class="table-secondary">
+                                            <tr>
+                                                <th>Material</th>
+                                                <th>Silo</th>
+                                                <th class="text-end">Target (kg)</th>
+                                                <th class="text-end">Actual (kg)</th>
+                                                <th class="text-end">Moisture %</th>
+                                                <th class="text-end">Corrected (kg)</th>
+                                                <th class="text-end">Variance</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <t t-foreach="o.material_line_ids" t-as="line">
+                                                <tr>
+                                                    <td><t t-esc="line.product_id.name"/></td>
+                                                    <td><t t-esc="line.silo_id.name or '-'"/></td>
+                                                    <td class="text-end"><t t-esc="'%.2f' % line.target_qty"/></td>
+                                                    <td class="text-end"><t t-esc="'%.2f' % line.actual_qty"/></td>
+                                                    <td class="text-end"><t t-esc="'%.2f' % line.moisture_pct"/></td>
+                                                    <td class="text-end"><t t-esc="'%.2f' % line.moisture_corrected_qty"/></td>
+                                                    <td class="text-end"
+                                                        t-attf-style="color: {{ 'red' if abs(line.variance) > 10 else 'inherit' }}">
+                                                        <t t-esc="'%.2f' % line.variance"/>
+                                                    </td>
+                                                </tr>
+                                            </t>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </t>
+
+                        <!-- Compliance -->
+                        <div class="row mb-3">
+                            <div class="col-6">
+                                <table class="table table-sm table-borderless">
+                                    <tr><th colspan="2" class="bg-light">Compliance</th></tr>
+                                    <tr><td>W/C Ratio Actual:</td><td><t t-esc="'%.3f' % o.wc_ratio_actual"/></td></tr>
+                                    <tr><td>Water Added at Site (L):</td><td><t t-esc="'%.1f' % o.water_added_site"/></td></tr>
+                                    <t t-if="o.compliance_breach">
+                                        <tr><td colspan="2" class="text-danger">
+                                            <strong><t t-esc="o.compliance_notes"/></strong>
+                                        </td></tr>
+                                    </t>
+                                </table>
+                            </div>
+                            <div class="col-6">
+                                <table class="table table-sm table-borderless">
+                                    <tr><th colspan="2" class="bg-light">Signature</th></tr>
+                                    <tr><td>Signed By:</td><td><t t-esc="o.signed_by or '...........................'"/></td></tr>
+                                    <tr><td>Time:</td><td><t t-esc="o.signed_time or '...........................'"/></td></tr>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- Notes -->
+                        <t t-if="o.notes">
+                            <div class="row">
+                                <div class="col-12">
+                                    <strong>Notes:</strong> <t t-esc="o.notes"/>
+                                </div>
+                            </div>
+                        </t>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

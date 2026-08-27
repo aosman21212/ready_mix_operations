@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- ══════════════════════════════════════════════════
+             MIX DESIGNS
+        ══════════════════════════════════════════════════ -->
+
+        <!-- C25/30 — Standard Blinding -->
+        <record id="mix_c25" model="ready.mix.product">
+            <field name="name">C25/30 Standard</field>
+            <field name="code">MX-C25</field>
+            <field name="product_id" ref="product_c25"/>
+            <field name="grade">C25/30</field>
+            <field name="compressive_strength">25.0</field>
+            <field name="slump_min">80.0</field>
+            <field name="slump_max">180.0</field>
+            <field name="max_wc_ratio">0.60</field>
+            <field name="cement_content">280.0</field>
+            <field name="max_aggregate_size">20.0</field>
+            <field name="air_content_min">1.0</field>
+            <field name="air_content_max">4.0</field>
+            <field name="exposure_class">XC2</field>
+            <field name="state">approved</field>
+            <field name="approved_by" ref="base.user_admin"/>
+            <field name="approval_date">2026-01-15</field>
+            <field name="consultant_approved">True</field>
+            <field name="consultant_name">Dr. James Elliott</field>
+            <field name="consultant_date">2026-01-20</field>
+            <field name="notes">Standard structural concrete for foundations and slabs.</field>
+        </record>
+        <record id="mix_c25_line1" model="ready.mix.product.line">
+            <field name="mix_id" ref="mix_c25"/>
+            <field name="sequence">10</field>
+            <field name="product_id" ref="product_opc_cement"/>
+            <field name="silo_id" ref="silo_cement_1"/>
+            <field name="quantity">280.0</field>
+            <field name="uom_id" ref="uom.product_uom_kgm"/>
+        </record>
+        <record id="mix_c25_line2" model="ready.mix.product.line">
+            <field name="mix_id" ref="mix_c25"/>
+            <field name="sequence">20</field>
+            <field name="product_id" ref="product_coarse_aggregate"/>
+            <field name="silo_id" ref="silo_coarse_agg"/>
+            <field name="quantity">1020.0</field>
+            <field name="uom_id" ref="uom.product_uom_kgm"/>
+            <field name="moisture_correction">True</field>
+        </record>
+        <record id="mix_c25_line3" model="ready.mix.product.line">
+            <field name="mix_id" ref="mix_c25"/>
+            <field name="sequence">30</field>
+            <field name="product_id" ref="product_fine_aggregate"/>
+            <field name="silo_id" ref="silo_fine_agg"/>
+            <field name="quantity">720.0</field>
+            <field name="uom_id" ref="uom.product_uom_kgm"/>
+            <field name="moisture_correction">True</field>
+        </record>
+        <record id="mix_c25_line4" model="ready.mix.product.line">
+            <field name="mix_id" ref="mix_c25"/>
+            <field name="sequence">40</field>
+            <field name="product_id" ref="product_water"/>
+            <field name="silo_id" ref="silo_water"/>
+            <field name="quantity">168.0</field>
+            <field name="uom_id" ref="uom.product_uom_kgm"/>
+        </record>
+
+        <!-- C30/37 — General Structural -->
+        <record id="mix_c30" model="ready.mix.product">
+            <field name="name">C30/37 General Structural</field>
+            <field name="code">MX-C30</field>
+            <field name="product_id" ref="product_c30"/>
+            <field name="grade">C30/37</field>
+            <field name="compressive_strength">30.0</field>
+            <field name="slump_min">100.0</field>
+            <field name="slump_max">180.0</field>
+            <field name="max_wc_ratio">0.55</field>
+            <field name="cement_content">320.0</field>
+            <field name="max_aggregate_size">20.0</field>
+            <field name="air_content_min">1.0</field>
+            <field name="air_content_max">4.0</field>
+            <field name="exposure_class">XC3</field>
+            <field name="state">approved</field>
+            <field name="approved_by" ref="base.user_admin"/>
+            <field name="approval_date">2026-01-15</field>
+            <field name="consultant_approved">True</field>
+            <field name="consultant_name">Dr. James Elliott</field>
+            <field name="consultant_date">2026-01-20</field>
+            <field name="notes">General purpose structural concrete. Suitable for columns, beams, and suspended slabs.</field>
+        </record>
+        <record id="mix_c30_line1" model="ready.mix.product.line">
+            <field name="mix_id" ref="mix_c30"/>
+            <field name="sequence">10</field>
+            <field name="product_id" ref="product_opc_cement"/>
+            <field name="silo_id" ref="silo_cement_1"/>
+            <field name="quantity">320.0</field>
+            <field name="uom_id" ref="uom.product_uom_kgm"/>
+        </record>
+        <record id="mix_c30_line2" model="ready.mix.product.line">
+            <field name="mix_id" ref="mix_c30"/>
+            <field name="sequence">20</field>
+            <field name="product_id" ref="product_coarse_aggregate"/>
+            <field name="silo_id" ref="silo_coarse_agg"/>
+            <field name="quantity">980.0</field>
+            <field name="uom_id" ref="uom.product_uom_kgm"/>
+            <field name="moisture_correction">True</field>
+        </record>
+        <record id="mix_c30_line3" model="ready.mix.product.line">
+            <field name="mix_id" ref="mix_c30"/>
+            <field name="sequence">30</field>
+            <field name="product_id" ref="product_fine_aggregate"/>
+            <field name="silo_id" ref="silo_fine_agg"/>
+            <field name="quantity">700.0</field>
+            <field name="uom_id" ref="uom.product_uom_kgm"/>
+            <field name="moisture_correction">True</field>
+        </record>
+        <record id="mix_c30_line4" model="ready.mix.product.line">
+            <field name="mix_id" ref="mix_c30"/>
+            <field name="sequence">40</field>
+            <field name="product_id" ref="product_water"/>
+            <field name="silo_id" ref="silo_water"/>
+            <field name="quantity">176.0</field>
+            <field name="uom_id" ref="uom.product_uom_kgm"/>
+        </record>
+        <record id="mix_c30_line5" model="ready.mix.product.line">
+            <field name="mix_id" ref="mix_c30"/>
+            <field name="sequence">50</field>
+            <field name="product_id" ref="product_admixture"/>
+            <field name="silo_id" ref="silo_admixture"/>
+            <field name="quantity">3.2</field>
+            <field name="uom_id" ref="uom.product_uom_kgm"/>
+        </record>
+
+        <!-- C35/45 — High Strength -->
+        <record id="mix_c35" model="ready.mix.product">
+            <field name="name">C35/45 High Strength</field>
+            <field name="code">MX-C35</field>
+            <field name="product_id" ref="product_c35"/>
+            <field name="grade">C35/45</field>
+            <field name="compressive_strength">35.0</field>
+            <field name="slump_min">120.0</field>
+            <field name="slump_max">200.0</field>
+            <field name="max_wc_ratio">0.48</field>
+            <field name="cement_content">370.0</field>
+            <field name="max_aggregate_size">20.0</field>
+            <field name="air_content_min">1.0</field>
+            <field name="air_content_max">4.0</field>
+            <field name="exposure_class">XC4</field>
+            <field name="state">approved</field>
+            <field name="approved_by" ref="base.user_admin"/>
+            <field name="approval_date">2026-02-01</field>
+            <field name="consultant_approved">True</field>
+            <field name="consultant_name">Dr. James Elliott</field>
+            <field name="consultant_date">2026-02-05</field>
+            <field name="notes">High-strength mix for high-rise columns and transfer slabs. SP dosage critical.</field>
+        </record>
+        <record id="mix_c35_line1" model="ready.mix.product.line">
+            <field name="mix_id" ref="mix_c35"/>
+            <field name="sequence">10</field>
+            <field name="product_id" ref="product_opc_cement"/>
+            <field name="silo_id" ref="silo_cement_2"/>
+            <field name="quantity">370.0</field>
+            <field name="uom_id" ref="uom.product_uom_kgm"/>
+        </record>
+        <record id="mix_c35_line2" model="ready.mix.product.line">
+            <field name="mix_id" ref="mix_c35"/>
+            <field name="sequence">20</field>
+            <field name="product_id" ref="product_coarse_aggregate"/>
+            <field name="silo_id" ref="silo_coarse_agg"/>
+            <field name="quantity">950.0</field>
+            <field name="uom_id" ref="uom.product_uom_kgm"/>
+            <field name="moisture_correction">True</field>
+        </record>
+        <record id="mix_c35_line3" model="ready.mix.product.line">
+            <field name="mix_id" ref="mix_c35"/>
+            <field name="sequence">30</field>
+            <field name="product_id" ref="product_fine_aggregate"/>
+            <field name="silo_id" ref="silo_fine_agg"/>
+            <field name="quantity">680.0</field>
+            <field name="uom_id" ref="uom.product_uom_kgm"/>
+            <field name="moisture_correction">True</field>
+        </record>
+        <record id="mix_c35_line4" model="ready.mix.product.line">
+            <field name="mix_id" ref="mix_c35"/>
+            <field name="sequence">40</field>
+            <field name="product_id" ref="product_water"/>
+            <field name="silo_id" ref="silo_water"/>
+            <field name="quantity">177.6</field>
+            <field name="uom_id" ref="uom.product_uom_kgm"/>
+        </record>
+        <record id="mix_c35_line5" model="ready.mix.product.line">
+            <field name="mix_id" ref="mix_c35"/>
+            <field name="sequence">50</field>
+            <field name="product_id" ref="product_admixture"/>
+            <field name="silo_id" ref="silo_admixture"/>
+            <field name="quantity">5.5</field>
+            <field name="uom_id" ref="uom.product_uom_kgm"/>
+        </record>
+
+        <!-- C40/50 — Very High Strength -->
+        <record id="mix_c40" model="ready.mix.product">
+            <field name="name">C40/50 Very High Strength</field>
+            <field name="code">MX-C40</field>
+            <field name="product_id" ref="product_c40"/>
+            <field name="grade">C40/50</field>
+            <field name="compressive_strength">40.0</field>
+            <field name="slump_min">150.0</field>
+            <field name="slump_max">220.0</field>
+            <field name="max_wc_ratio">0.40</field>
+            <field name="cement_content">420.0</field>
+            <field name="max_aggregate_size">14.0</field>
+            <field name="air_content_min">1.0</field>
+            <field name="air_content_max">3.5</field>
+            <field name="exposure_class">XS1</field>
+            <field name="state">approved</field>
+            <field name="approved_by" ref="base.user_admin"/>
+            <field name="approval_date">2026-02-10</field>
+            <field name="consultant_approved">True</field>
+            <field name="consultant_name">Dr. James Elliott</field>
+            <field name="consultant_date">2026-02-15</field>
+            <field name="notes">Marine-grade high-strength concrete. Strict W/C ratio control required.</field>
+        </record>
+        <record id="mix_c40_line1" model="ready.mix.product.line">
+            <field name="mix_id" ref="mix_c40"/>
+            <field name="sequence">10</field>
+            <field name="product_id" ref="product_opc_cement"/>
+            <field name="silo_id" ref="silo_cement_2"/>
+            <field name="quantity">420.0</field>
+            <field name="uom_id" ref="uom.product_uom_kgm"/>
+        </record>
+        <record id="mix_c40_line2" model="ready.mix.product.line">
+            <field name="mix_id" ref="mix_c40"/>
+            <field name="sequence">20</field>
+            <field name="product_id" ref="product_coarse_aggregate"/>
+            <field name="silo_id" ref="silo_coarse_agg"/>
+            <field name="quantity">880.0</field>
+            <field name="uom_id" ref="uom.product_uom_kgm"/>
+            <field name="moisture_correction">True</field>
+        </record>
+        <record id="mix_c40_line3" model="ready.mix.product.line">
+            <field name="mix_id" ref="mix_c40"/>
+            <field name="sequence">30</field>
+            <field name="product_id" ref="product_fine_aggregate"/>
+            <field name="silo_id" ref="silo_fine_agg"/>
+            <field name="quantity">650.0</field>
+            <field name="uom_id" ref="uom.product_uom_kgm"/>
+            <field name="moisture_correction">True</field>
+        </record>
+        <record id="mix_c40_line4" model="ready.mix.product.line">
+            <field name="mix_id" ref="mix_c40"/>
+            <field name="sequence">40</field>
+            <field name="product_id" ref="product_water"/>
+            <field name="silo_id" ref="silo_water"/>
+            <field name="quantity">168.0</field>
+            <field name="uom_id" ref="uom.product_uom_kgm"/>
+        </record>
+        <record id="mix_c40_line5" model="ready.mix.product.line">
+            <field name="mix_id" ref="mix_c40"/>
+            <field name="sequence">50</field>
+            <field name="product_id" ref="product_admixture"/>
+            <field name="silo_id" ref="silo_admixture"/>
+            <field name="quantity">7.5</field>
+            <field name="uom_id" ref="uom.product_uom_kgm"/>
+        </record>
+    </data>
+</odoo>

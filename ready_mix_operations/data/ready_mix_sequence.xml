@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="seq_ready_mix_rate_agreement" model="ir.sequence">
+            <field name="name">Rate Agreement</field>
+            <field name="code">ready.mix.rate.agreement</field>
+            <field name="prefix">RA/%(year)s/</field>
+            <field name="padding">4</field>
+            <field name="company_id" eval="False"/>
+        </record>
+        <record id="seq_ready_mix_schedule" model="ir.sequence">
+            <field name="name">Delivery Schedule</field>
+            <field name="code">ready.mix.schedule</field>
+            <field name="prefix">SCH/%(year)s/</field>
+            <field name="padding">4</field>
+            <field name="company_id" eval="False"/>
+        </record>
+        <record id="seq_ready_mix_dispatch" model="ir.sequence">
+            <field name="name">Dispatch</field>
+            <field name="code">ready.mix.dispatch</field>
+            <field name="prefix">DIS/%(year)s/</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
+        </record>
+        <record id="seq_ready_mix_load" model="ir.sequence">
+            <field name="name">Load Ticket</field>
+            <field name="code">ready.mix.load</field>
+            <field name="prefix">LT/%(year)s/</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
+        </record>
+        <record id="seq_ready_mix_qc_test" model="ir.sequence">
+            <field name="name">QC Fresh Test</field>
+            <field name="code">ready.mix.qc.test</field>
+            <field name="prefix">QCT/%(year)s/</field>
+            <field name="padding">4</field>
+            <field name="company_id" eval="False"/>
+        </record>
+        <record id="seq_ready_mix_sample" model="ir.sequence">
+            <field name="name">Specimen Sample</field>
+            <field name="code">ready.mix.sample</field>
+            <field name="prefix">SMP/%(year)s/</field>
+            <field name="padding">4</field>
+            <field name="company_id" eval="False"/>
+        </record>
+        <record id="seq_ready_mix_ncr" model="ir.sequence">
+            <field name="name">NCR</field>
+            <field name="code">ready.mix.ncr</field>
+            <field name="prefix">NCR/%(year)s/</field>
+            <field name="padding">4</field>
+            <field name="company_id" eval="False"/>
+        </record>
+        <record id="seq_ready_mix_cost" model="ir.sequence">
+            <field name="name">Cost Sheet</field>
+            <field name="code">ready.mix.cost</field>
+            <field name="prefix">CST/%(year)s/</field>
+            <field name="padding">4</field>
+            <field name="company_id" eval="False"/>
+        </record>
+        <record id="seq_ready_mix_moisture" model="ir.sequence">
+            <field name="name">Moisture Log</field>
+            <field name="code">ready.mix.moisture</field>
+            <field name="prefix">MOI/%(year)s/</field>
+            <field name="padding">4</field>
+            <field name="company_id" eval="False"/>
+        </record>
+        <record id="seq_ready_mix_washout" model="ir.sequence">
+            <field name="name">Washout Record</field>
+            <field name="code">ready.mix.washout</field>
+            <field name="prefix">WO/%(year)s/</field>
+            <field name="padding">4</field>
+            <field name="company_id" eval="False"/>
+        </record>
+    </data>
+</odoo>

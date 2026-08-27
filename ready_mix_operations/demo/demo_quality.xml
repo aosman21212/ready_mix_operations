@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- ══════════════════════════════════════════════════
+             FRESH QC TESTS
+        ══════════════════════════════════════════════════ -->
+        <record id="qc_test_01" model="ready.mix.qc.test">
+            <field name="name">QCT/2026/0088</field>
+            <field name="load_id" ref="load_marina_01"/>
+            <field name="test_date">2026-08-27</field>
+            <field name="technician_id" ref="base.user_admin"/>
+            <field name="slump">155.0</field>
+            <field name="air_content">3.2</field>
+            <field name="temperature">28.5</field>
+            <field name="density">2385.0</field>
+            <field name="water_added">0.0</field>
+            <field name="wc_ratio">0.472</field>
+            <field name="state">confirmed</field>
+            <field name="notes">All fresh properties within spec. Good workability observed on site.</field>
+        </record>
+
+        <record id="qc_test_02" model="ready.mix.qc.test">
+            <field name="name">QCT/2026/0087</field>
+            <field name="load_id" ref="load_marina_02"/>
+            <field name="test_date">2026-08-27</field>
+            <field name="technician_id" ref="base.user_admin"/>
+            <field name="slump">142.0</field>
+            <field name="air_content">2.8</field>
+            <field name="temperature">29.0</field>
+            <field name="density">2391.0</field>
+            <field name="water_added">0.0</field>
+            <field name="wc_ratio">0.464</field>
+            <field name="state">confirmed</field>
+        </record>
+
+        <!-- Failing QC test — slump out of spec (too low) -->
+        <record id="qc_test_fail" model="ready.mix.qc.test">
+            <field name="name">QCT/2026/0078</field>
+            <field name="load_id" ref="load_breach_01"/>
+            <field name="test_date">2026-08-25</field>
+            <field name="technician_id" ref="base.user_admin"/>
+            <field name="slump">45.0</field>
+            <field name="air_content">2.1</field>
+            <field name="temperature">32.0</field>
+            <field name="density">2402.0</field>
+            <field name="water_added">15.0</field>
+            <field name="wc_ratio">0.61</field>
+            <field name="state">confirmed</field>
+            <field name="notes">Slump significantly below minimum. Water added on site. Compliance breach recorded.</field>
+        </record>
+
+        <!-- ══════════════════════════════════════════════════
+             CUBE / CYLINDER SPECIMENS
+        ══════════════════════════════════════════════════ -->
+
+        <!-- Specimens from load 1 — 7d passed, 28d pending -->
+        <record id="sample_marina_01_7d" model="ready.mix.sample">
+            <field name="name">SMP/2026/0170</field>
+            <field name="load_id" ref="load_marina_01"/>
+            <field name="sample_type">cube</field>
+            <field name="sample_date">2026-08-27</field>
+            <field name="test_age_days">7</field>
+            <field name="test_due_date">2026-09-03</field>
+            <field name="test_date">2026-09-03</field>
+            <field name="technician_id" ref="base.user_admin"/>
+            <field name="failure_load_kn">862.0</field>
+            <field name="cross_section_area">22500.0</field>
+            <field name="state">tested</field>
+            <field name="notes">7-day result. Strength developing well — extrapolates to ~42 MPa at 28d.</field>
+        </record>
+
+        <record id="sample_marina_01_28d" model="ready.mix.sample">
+            <field name="name">SMP/2026/0171</field>
+            <field name="load_id" ref="load_marina_01"/>
+            <field name="sample_type">cube</field>
+            <field name="sample_date">2026-08-27</field>
+            <field name="test_age_days">28</field>
+            <field name="test_due_date">2026-09-24</field>
+            <field name="state">pending</field>
+        </record>
+
+        <record id="sample_marina_02_7d" model="ready.mix.sample">
+            <field name="name">SMP/2026/0168</field>
+            <field name="load_id" ref="load_marina_02"/>
+            <field name="sample_type">cube</field>
+            <field name="sample_date">2026-08-27</field>
+            <field name="test_age_days">7</field>
+            <field name="test_due_date">2026-09-03</field>
+            <field name="test_date">2026-09-03</field>
+            <field name="technician_id" ref="base.user_admin"/>
+            <field name="failure_load_kn">927.0</field>
+            <field name="cross_section_area">22500.0</field>
+            <field name="state">tested</field>
+        </record>
+
+        <!-- Specimen from breach load — 28d FAIL -->
+        <record id="sample_breach_28d" model="ready.mix.sample">
+            <field name="name">SMP/2026/0155</field>
+            <field name="load_id" ref="load_breach_01"/>
+            <field name="sample_type">cube</field>
+            <field name="sample_date">2026-08-25</field>
+            <field name="test_age_days">28</field>
+            <field name="test_due_date">2026-09-22</field>
+            <field name="test_date">2026-09-22</field>
+            <field name="technician_id" ref="base.user_admin"/>
+            <field name="failure_load_kn">584.0</field>
+            <field name="cross_section_area">22500.0</field>
+            <field name="state">tested</field>
+            <field name="notes">28-day strength below target. Water addition and compliance breach on load noted.</field>
+        </record>
+
+        <!-- Bridge load — certified -->
+        <record id="sample_bridge_28d" model="ready.mix.sample">
+            <field name="name">SMP/2026/0148</field>
+            <field name="load_id" ref="load_bridge_01"/>
+            <field name="sample_type">cylinder</field>
+            <field name="sample_date">2026-08-26</field>
+            <field name="test_age_days">28</field>
+            <field name="test_due_date">2026-09-23</field>
+            <field name="test_date">2026-09-23</field>
+            <field name="technician_id" ref="base.user_admin"/>
+            <field name="failure_load_kn">1155.0</field>
+            <field name="cross_section_area">17671.0</field>
+            <field name="state">certified</field>
+            <field name="certificate_issued">True</field>
+        </record>
+
+        <!-- ══════════════════════════════════════════════════
+             NCR / CAPA
+        ══════════════════════════════════════════════════ -->
+        <record id="ncr_breach_001" model="ready.mix.ncr">
+            <field name="name">NCR/2026/0014</field>
+            <field name="load_id" ref="load_breach_01"/>
+            <field name="date">2026-08-25</field>
+            <field name="source">qc_test</field>
+            <field name="severity">major</field>
+            <field name="description">Load LT/2026/00035: slump recorded at 45mm (minimum 80mm). Water (15L) added on site without authorisation. Drum revolutions exceeded 300 limit (332). W/C ratio exceeded maximum (0.61 vs 0.60 max). Multiple simultaneous compliance breaches.</field>
+            <field name="root_cause">Driver delayed at weighbridge for 90 minutes causing concrete to stiffen. Driver added water without calling plant for authorisation. Weighbridge process does not include a check-call step before water addition.</field>
+            <field name="immediate_action">Load acceptance decision escalated to site engineer and QC manager. Additional cube samples taken. Load used for non-structural blinding only after structural engineer approval.</field>
+            <field name="corrective_action">1. Retrain all drivers on water-addition prohibition policy.\n2. Install cab-mounted water-addition alert system.\n3. Implement 60-minute on-site timer alert from batching time.</field>
+            <field name="preventive_action">Update standing operating procedure to include mandatory plant call before any on-site addition. Add real-time drum revolution monitoring to dispatch system.</field>
+            <field name="responsible_id" ref="base.user_admin"/>
+            <field name="target_close_date">2026-09-15</field>
+            <field name="state">in_progress</field>
+        </record>
+
+        <record id="ncr_sample_fail" model="ready.mix.ncr">
+            <field name="name">NCR/2026/0013</field>
+            <field name="load_id" ref="load_breach_01"/>
+            <field name="date">2026-09-22</field>
+            <field name="source">sample</field>
+            <field name="severity">major</field>
+            <field name="description">Specimen SMP/2026/0155 failed at 28 days: 25.9 MPa against C25/30 target of 25.0 MPa. However, given compliance breaches on the parent load, the result is considered unsatisfactory and warrants full CAPA review.</field>
+            <field name="root_cause">Linked to NCR/2026/0014 — water addition and drum over-revolution on parent load.</field>
+            <field name="immediate_action">Core samples drilled from placed concrete for independent verification of in-situ strength.</field>
+            <field name="responsible_id" ref="base.user_admin"/>
+            <field name="target_close_date">2026-10-05</field>
+            <field name="state">open</field>
+        </record>
+    </data>
+</odoo>

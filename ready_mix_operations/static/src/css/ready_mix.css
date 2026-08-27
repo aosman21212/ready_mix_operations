@@ -1,0 +1,33 @@
+/* Ready Mix Operations - Custom Styles */
+
+.o_ready_mix_breach {
+    background-color: #ffe0e0 !important;
+}
+
+.o_ready_mix_plant_capacity {
+    font-weight: bold;
+    color: #2c7be5;
+}
+
+/* KPI tiles on dashboard */
+.o_ready_mix_kpi {
+    border-radius: 8px;
+    padding: 16px;
+    margin: 8px;
+    background: #f8f9fa;
+    border: 1px solid #dee2e6;
+    text-align: center;
+}
+
+.o_ready_mix_kpi .o_kpi_value {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #2c7be5;
+}
+
+.o_ready_mix_kpi .o_kpi_label {
+    font-size: 0.85rem;
+    color: #6c757d;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}

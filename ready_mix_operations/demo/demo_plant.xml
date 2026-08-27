@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- ══════════════════════════════════════════════════
+             PLANTS
+        ══════════════════════════════════════════════════ -->
+        <record id="plant_central" model="ready.mix.plant">
+            <field name="name">Central Batching Plant</field>
+            <field name="code">CBP-01</field>
+            <field name="timezone">America/Chicago</field>
+            <field name="capacity_m3_per_hour">90.0</field>
+            <field name="max_trucks">12</field>
+            <field name="quality_standard">en206</field>
+            <field name="max_transit_time">90</field>
+            <field name="max_drum_revolutions">300</field>
+            <field name="block_on_cert_gap">True</field>
+            <field name="block_on_stock_gap">False</field>
+            <field name="transport_rate">8.50</field>
+            <field name="driver_rate">22.00</field>
+            <field name="pump_rate">12.00</field>
+            <field name="overhead_rate">5.00</field>
+        </record>
+
+        <record id="plant_north" model="ready.mix.plant">
+            <field name="name">North District Plant</field>
+            <field name="code">NDP-02</field>
+            <field name="timezone">America/Chicago</field>
+            <field name="capacity_m3_per_hour">60.0</field>
+            <field name="max_trucks">8</field>
+            <field name="quality_standard">aci318</field>
+            <field name="max_transit_time">75</field>
+            <field name="max_drum_revolutions">300</field>
+            <field name="block_on_cert_gap">True</field>
+            <field name="block_on_stock_gap">True</field>
+            <field name="transport_rate">9.00</field>
+            <field name="driver_rate">24.00</field>
+            <field name="pump_rate">13.00</field>
+            <field name="overhead_rate">5.50</field>
+        </record>
+
+        <!-- ══════════════════════════════════════════════════
+             SILOS — Central Plant
+        ══════════════════════════════════════════════════ -->
+        <record id="silo_cement_1" model="ready.mix.silo">
+            <field name="name">Cement Silo A</field>
+            <field name="plant_id" ref="plant_central"/>
+            <field name="silo_type">cement</field>
+            <field name="product_id" ref="product_opc_cement"/>
+            <field name="capacity_tonnes">200.0</field>
+            <field name="current_stock">148.5</field>
+            <field name="reorder_point">40.0</field>
+            <field name="last_calibration_date">2026-06-01</field>
+            <field name="calibration_due_date">2026-12-01</field>
+        </record>
+
+        <record id="silo_cement_2" model="ready.mix.silo">
+            <field name="name">Cement Silo B</field>
+            <field name="plant_id" ref="plant_central"/>
+            <field name="silo_type">cement</field>
+            <field name="product_id" ref="product_opc_cement"/>
+            <field name="capacity_tonnes">200.0</field>
+            <field name="current_stock">62.0</field>
+            <field name="reorder_point">40.0</field>
+            <field name="last_calibration_date">2026-06-01</field>
+            <field name="calibration_due_date">2026-12-01</field>
+        </record>
+
+        <record id="silo_coarse_agg" model="ready.mix.silo">
+            <field name="name">Coarse Aggregate Bin 1</field>
+            <field name="plant_id" ref="plant_central"/>
+            <field name="silo_type">aggregate</field>
+            <field name="product_id" ref="product_coarse_aggregate"/>
+            <field name="capacity_tonnes">500.0</field>
+            <field name="current_stock">312.0</field>
+            <field name="reorder_point">100.0</field>
+            <field name="last_calibration_date">2026-04-15</field>
+            <field name="calibration_due_date">2026-10-15</field>
+        </record>
+
+        <record id="silo_fine_agg" model="ready.mix.silo">
+            <field name="name">Fine Aggregate (Sand) Bin</field>
+            <field name="plant_id" ref="plant_central"/>
+            <field name="silo_type">aggregate</field>
+            <field name="product_id" ref="product_fine_aggregate"/>
+            <field name="capacity_tonnes">400.0</field>
+            <field name="current_stock">85.0</field>
+            <field name="reorder_point">80.0</field>
+            <field name="last_calibration_date">2026-04-15</field>
+            <field name="calibration_due_date">2026-09-20</field>
+        </record>
+
+        <record id="silo_water" model="ready.mix.silo">
+            <field name="name">Water Tank</field>
+            <field name="plant_id" ref="plant_central"/>
+            <field name="silo_type">water</field>
+            <field name="product_id" ref="product_water"/>
+            <field name="capacity_tonnes">50.0</field>
+            <field name="current_stock">38.0</field>
+            <field name="reorder_point">10.0</field>
+        </record>
+
+        <record id="silo_admixture" model="ready.mix.silo">
+            <field name="name">Admixture Tank (SP)</field>
+            <field name="plant_id" ref="plant_central"/>
+            <field name="silo_type">admixture</field>
+            <field name="product_id" ref="product_admixture"/>
+            <field name="capacity_tonnes">5.0</field>
+            <field name="current_stock">2.8</field>
+            <field name="reorder_point">1.0</field>
+        </record>
+
+        <!-- ══════════════════════════════════════════════════
+             SILOS — North Plant
+        ══════════════════════════════════════════════════ -->
+        <record id="silo_north_cement" model="ready.mix.silo">
+            <field name="name">Cement Silo</field>
+            <field name="plant_id" ref="plant_north"/>
+            <field name="silo_type">cement</field>
+            <field name="product_id" ref="product_opc_cement"/>
+            <field name="capacity_tonnes">150.0</field>
+            <field name="current_stock">92.0</field>
+            <field name="reorder_point">30.0</field>
+            <field name="last_calibration_date">2026-05-10</field>
+            <field name="calibration_due_date">2026-11-10</field>
+        </record>
+
+        <record id="silo_north_agg" model="ready.mix.silo">
+            <field name="name">Coarse Aggregate Bin</field>
+            <field name="plant_id" ref="plant_north"/>
+            <field name="silo_type">aggregate</field>
+            <field name="product_id" ref="product_coarse_aggregate"/>
+            <field name="capacity_tonnes">350.0</field>
+            <field name="current_stock">220.0</field>
+            <field name="reorder_point">70.0</field>
+            <field name="last_calibration_date">2026-03-01</field>
+            <field name="calibration_due_date">2026-09-01</field>
+        </record>
+    </data>
+</odoo>

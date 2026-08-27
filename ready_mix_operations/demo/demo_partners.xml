@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- ══════════════════════════════════════════════════
+             CUSTOMER PARTNERS
+        ══════════════════════════════════════════════════ -->
+        <record id="partner_mega_builders" model="res.partner">
+            <field name="name">Mega Builders LLC</field>
+            <field name="customer_rank">1</field>
+            <field name="street">42 Construction Ave</field>
+            <field name="city">Chicago</field>
+            <field name="country_id" ref="base.us"/>
+            <field name="phone">+1 312 555 0101</field>
+            <field name="email">contact@megabuilders.com</field>
+        </record>
+
+        <record id="partner_gulf_contracting" model="res.partner">
+            <field name="name">Gulf Contracting Co.</field>
+            <field name="customer_rank">1</field>
+            <field name="street">Business Bay, Tower 7</field>
+            <field name="city">Chicago</field>
+            <field name="country_id" ref="base.us"/>
+            <field name="phone">+1 312 555 0202</field>
+            <field name="email">projects@gulfcontracting.com</field>
+        </record>
+
+        <record id="partner_national_works" model="res.partner">
+            <field name="name">National Construction Works</field>
+            <field name="customer_rank">1</field>
+            <field name="street">Industrial Zone, Blk 3</field>
+            <field name="city">Chicago</field>
+            <field name="country_id" ref="base.us"/>
+            <field name="phone">+1 312 555 0303</field>
+            <field name="email">info@nationalworks.com</field>
+        </record>
+
+        <!-- Drivers -->
+        <record id="partner_driver_ahmed" model="res.partner">
+            <field name="name">Ahmed Hassan</field>
+            <field name="company_type">person</field>
+            <field name="phone">+1 312 555 1001</field>
+        </record>
+
+        <record id="partner_driver_mike" model="res.partner">
+            <field name="name">Mike Reyes</field>
+            <field name="company_type">person</field>
+            <field name="phone">+1 312 555 1002</field>
+        </record>
+
+        <record id="partner_driver_sara" model="res.partner">
+            <field name="name">Sara Khalil</field>
+            <field name="company_type">person</field>
+            <field name="phone">+1 312 555 1003</field>
+        </record>
+
+        <!-- Supplier for materials -->
+        <record id="partner_cement_supplier" model="res.partner">
+            <field name="name">Alpha Cement Industries</field>
+            <field name="supplier_rank">1</field>
+            <field name="street">Port Industrial Area</field>
+            <field name="city">Chicago</field>
+            <field name="country_id" ref="base.us"/>
+            <field name="email">sales@alphacement.com</field>
+        </record>
+    </data>
+</odoo>

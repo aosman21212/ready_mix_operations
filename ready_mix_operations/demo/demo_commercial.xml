@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- ══════════════════════════════════════════════════
+             JOB SITES
+        ══════════════════════════════════════════════════ -->
+        <record id="site_marina_tower" model="ready.mix.jobsite">
+            <field name="name">Marina Tower – Site B</field>
+            <field name="code">MB-MARINA</field>
+            <field name="partner_id" ref="partner_mega_builders"/>
+            <field name="street">200 Lakeshore Drive</field>
+            <field name="city">Chicago</field>
+            <field name="country_id" ref="base.us"/>
+            <field name="distance_km">12.5</field>
+            <field name="pump_required">True</field>
+            <field name="site_engineer">John Carter</field>
+            <field name="site_phone">+1 312 555 2001</field>
+            <field name="site_email">jcarter@megabuilders.com</field>
+            <field name="notes">34-floor residential tower. Pump required above level 4. Access via south gate only before 07:00.</field>
+        </record>
+
+        <record id="site_west_campus" model="ready.mix.jobsite">
+            <field name="name">West Campus – Phase 2</field>
+            <field name="code">MB-WEST</field>
+            <field name="partner_id" ref="partner_mega_builders"/>
+            <field name="street">1 University Blvd West</field>
+            <field name="city">Chicago</field>
+            <field name="country_id" ref="base.us"/>
+            <field name="distance_km">8.0</field>
+            <field name="pump_required">False</field>
+            <field name="site_engineer">Lisa Park</field>
+            <field name="site_phone">+1 312 555 2002</field>
+            <field name="notes">University expansion. Ground slabs only – direct truck discharge.</field>
+        </record>
+
+        <record id="site_harbour_gate" model="ready.mix.jobsite">
+            <field name="name">Harbour Gate Bridge</field>
+            <field name="code">GC-BRIDGE</field>
+            <field name="partner_id" ref="partner_gulf_contracting"/>
+            <field name="street">Harbour Expressway, KM 14</field>
+            <field name="city">Chicago</field>
+            <field name="country_id" ref="base.us"/>
+            <field name="distance_km">22.0</field>
+            <field name="pump_required">True</field>
+            <field name="site_engineer">Omar Farouk</field>
+            <field name="site_phone">+1 312 555 2003</field>
+            <field name="notes">Bridge deck pours. Tight access – max 2 trucks on site at once. Night pours on Fridays.</field>
+        </record>
+
+        <record id="site_industrial_zone" model="ready.mix.jobsite">
+            <field name="name">Industrial Zone – Warehouse C</field>
+            <field name="code">NW-IZ-C</field>
+            <field name="partner_id" ref="partner_national_works"/>
+            <field name="street">Zone 4, Plot 18</field>
+            <field name="city">Chicago</field>
+            <field name="country_id" ref="base.us"/>
+            <field name="distance_km">6.5</field>
+            <field name="pump_required">False</field>
+            <field name="site_engineer">Peter Walsh</field>
+            <field name="site_phone">+1 312 555 2004</field>
+            <field name="notes">Industrial floor slab. Laser-screed finishing. Continuous pour preferred.</field>
+        </record>
+
+        <!-- ══════════════════════════════════════════════════
+             RATE AGREEMENTS
+        ══════════════════════════════════════════════════ -->
+        <record id="ra_mega_central_2026" model="ready.mix.rate.agreement">
+            <field name="name">RA/2026/0001</field>
+            <field name="partner_id" ref="partner_mega_builders"/>
+            <field name="plant_id" ref="plant_central"/>
+            <field name="date_from">2026-01-01</field>
+            <field name="date_to">2026-12-31</field>
+            <field name="state">active</field>
+            <field name="notes">Annual framework agreement – Mega Builders / Central Plant 2026</field>
+        </record>
+        <record id="ra_mega_line_c25" model="ready.mix.rate.line">
+            <field name="agreement_id" ref="ra_mega_central_2026"/>
+            <field name="mix_product_id" ref="mix_c25"/>
+            <field name="unit_price">62.00</field>
+        </record>
+        <record id="ra_mega_line_c30" model="ready.mix.rate.line">
+            <field name="agreement_id" ref="ra_mega_central_2026"/>
+            <field name="mix_product_id" ref="mix_c30"/>
+            <field name="unit_price">72.00</field>
+        </record>
+        <record id="ra_mega_line_c35" model="ready.mix.rate.line">
+            <field name="agreement_id" ref="ra_mega_central_2026"/>
+            <field name="mix_product_id" ref="mix_c35"/>
+            <field name="unit_price">85.00</field>
+        </record>
+        <record id="ra_mega_line_c40" model="ready.mix.rate.line">
+            <field name="agreement_id" ref="ra_mega_central_2026"/>
+            <field name="mix_product_id" ref="mix_c40"/>
+            <field name="unit_price">96.00</field>
+        </record>
+
+        <record id="ra_gulf_central_2026" model="ready.mix.rate.agreement">
+            <field name="name">RA/2026/0002</field>
+            <field name="partner_id" ref="partner_gulf_contracting"/>
+            <field name="plant_id" ref="plant_central"/>
+            <field name="date_from">2026-03-01</field>
+            <field name="date_to">2026-12-31</field>
+            <field name="state">active</field>
+        </record>
+        <record id="ra_gulf_line_c30" model="ready.mix.rate.line">
+            <field name="agreement_id" ref="ra_gulf_central_2026"/>
+            <field name="mix_product_id" ref="mix_c30"/>
+            <field name="unit_price">74.50</field>
+        </record>
+        <record id="ra_gulf_line_c40" model="ready.mix.rate.line">
+            <field name="agreement_id" ref="ra_gulf_central_2026"/>
+            <field name="mix_product_id" ref="mix_c40"/>
+            <field name="unit_price">98.00</field>
+        </record>
+
+        <record id="ra_national_north_2026" model="ready.mix.rate.agreement">
+            <field name="name">RA/2026/0003</field>
+            <field name="partner_id" ref="partner_national_works"/>
+            <field name="plant_id" ref="plant_north"/>
+            <field name="date_from">2026-06-01</field>
+            <field name="date_to">2026-12-31</field>
+            <field name="state">active</field>
+        </record>
+        <record id="ra_national_line_c25" model="ready.mix.rate.line">
+            <field name="agreement_id" ref="ra_national_north_2026"/>
+            <field name="mix_product_id" ref="mix_c25"/>
+            <field name="unit_price">63.00</field>
+        </record>
+        <record id="ra_national_line_c30" model="ready.mix.rate.line">
+            <field name="agreement_id" ref="ra_national_north_2026"/>
+            <field name="mix_product_id" ref="mix_c30"/>
+            <field name="unit_price">73.50</field>
+        </record>
+    </data>
+</odoo>
