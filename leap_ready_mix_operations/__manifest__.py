@@ -20,6 +20,13 @@
     'category': 'Manufacturing',
     'author': 'Custom Development',
     'license': 'LGPL-3',
+    'images': [
+        'static/description/banner.png',
+        'static/description/icon.png',
+        'static/description/screenshot_list.png',
+        'static/description/screenshot_load.png',
+        'static/description/screenshot_qc.png',
+    ],
     'depends': [
         'sale_management',
         'stock',
