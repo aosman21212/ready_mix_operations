@@ -8,7 +8,7 @@
                 <header>
                     <button name="action_approve" string="Approve" type="object"
                             class="btn-primary" invisible="state != 'draft'"
-                            groups="ready_mix_operations.group_ready_mix_qc_manager"/>
+                            groups="leap_ready_mix_operations.group_ready_mix_qc_manager"/>
                     <button name="action_draft" string="Set to Draft" type="object"
                             invisible="state != 'approved'"/>
                     <button name="action_archive" string="Archive" type="object"

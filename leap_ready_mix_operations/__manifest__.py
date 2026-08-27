@@ -61,7 +61,7 @@
     ],
     'assets': {
         'web.assets_backend': [
-            'ready_mix_operations/static/src/css/ready_mix.css',
+            'leap_ready_mix_operations/static/src/css/ready_mix.css',
         ],
     },
     'demo': [

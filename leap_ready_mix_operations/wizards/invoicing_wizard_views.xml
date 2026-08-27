@@ -45,5 +45,5 @@
               parent="menu_ready_mix_finance"
               action="action_ready_mix_invoicing_wizard"
               sequence="5"
-              groups="ready_mix_operations.group_ready_mix_finance"/>
+              groups="leap_ready_mix_operations.group_ready_mix_finance"/>
 </odoo>

@@ -5,41 +5,41 @@
     <menuitem id="menu_ready_mix_root"
               name="Ready Mix"
               sequence="52"
-              web_icon="ready_mix_operations,static/description/icon.png"/>
+              web_icon="leap_ready_mix_operations,static/description/icon.png"/>
 
     <!-- Operations -->
-    <menuitem id="menu_ready_mix_operations"
+    <menuitem id="menu_leap_ready_mix_operations"
               name="Operations"
               parent="menu_ready_mix_root"
               sequence="10"/>
 
     <menuitem id="menu_ready_mix_dashboard"
               name="Dashboard"
-              parent="menu_ready_mix_operations"
+              parent="menu_leap_ready_mix_operations"
               action="action_ready_mix_dashboard"
               sequence="1"/>
 
     <menuitem id="menu_ready_mix_load"
               name="Load Tickets"
-              parent="menu_ready_mix_operations"
+              parent="menu_leap_ready_mix_operations"
               action="action_ready_mix_load"
               sequence="5"/>
 
     <menuitem id="menu_ready_mix_load_today"
               name="Today's Loads"
-              parent="menu_ready_mix_operations"
+              parent="menu_leap_ready_mix_operations"
               action="action_ready_mix_load_today"
               sequence="6"/>
 
     <menuitem id="menu_ready_mix_dispatch"
               name="Dispatch Plan"
-              parent="menu_ready_mix_operations"
+              parent="menu_leap_ready_mix_operations"
               action="action_ready_mix_dispatch"
               sequence="10"/>
 
     <menuitem id="menu_ready_mix_schedule"
               name="Delivery Schedules"
-              parent="menu_ready_mix_operations"
+              parent="menu_leap_ready_mix_operations"
               action="action_ready_mix_schedule"
               sequence="15"/>
 
@@ -48,7 +48,7 @@
               name="Quality"
               parent="menu_ready_mix_root"
               sequence="20"
-              groups="ready_mix_operations.group_ready_mix_qc"/>
+              groups="leap_ready_mix_operations.group_ready_mix_qc"/>
 
     <menuitem id="menu_ready_mix_qc_test"
               name="Fresh QC Tests"
@@ -85,7 +85,7 @@
               name="Finance"
               parent="menu_ready_mix_root"
               sequence="30"
-              groups="ready_mix_operations.group_ready_mix_finance"/>
+              groups="leap_ready_mix_operations.group_ready_mix_finance"/>
 
     <menuitem id="menu_ready_mix_cost"
               name="Cost Sheets"
@@ -134,7 +134,7 @@
               name="Configuration"
               parent="menu_ready_mix_root"
               sequence="90"
-              groups="ready_mix_operations.group_ready_mix_manager"/>
+              groups="leap_ready_mix_operations.group_ready_mix_manager"/>
 
     <menuitem id="menu_ready_mix_plant"
               name="Plants"
